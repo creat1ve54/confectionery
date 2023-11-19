@@ -1,0 +1,221 @@
+* {
+  font-family: $fontFamily;
+  font-size: 14px;
+  color: $black;
+}
+
+.h0 {
+  font-family: $fontFamily;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: auto;
+  color: $black;
+}
+
+.h1 {
+  font-family: $fontFamily;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: $black;
+}
+
+.h1-1 {
+  font-family: $fontFamily;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: auto;
+  color: $black;
+}
+
+.h2 {
+  font-family: $fontFamily;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 35px;
+  color: $black;
+}
+
+.h3-capital {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: $black;
+}
+
+.h4-capital {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  color: $black;
+}
+
+.subtitle-1 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 35px;
+  color: $black;
+}
+
+.subtitle-2 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: $black;
+}
+
+.subtitle-3 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: $black;
+}
+
+.subtitle-2-strikethrough {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: $black;
+  text-decoration: line-through;
+}
+
+.bttn-capital-accent {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: $white;
+}
+
+.cost-capital {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: $black;
+
+  &--red {
+    color: $red;
+  }
+}
+
+.cost-capital-1 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: $black;
+}
+
+.body-1 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: $black;
+}
+
+.body-1-1 {
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  color: $black;
+}
+
+.body-1-1-txt {
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: $black;
+}
+
+.body-2 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  color: $black;
+}
+
+.body-2-1 {
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  color: $black;
+}
+
+.body-3-underline {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  color: $black;
+  text-decoration: underline;
+}
+
+.body-4-underline {
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  color: $black;
+  text-decoration: underline;
+}
+
+.body-4-capital {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  color: $gray;
+}
+
+.caption {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  color: $black;
+}
+
+.caption-1 {
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: $gray;
+}
+
+.link-underline {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  color: $gray;
+  text-decoration: underline;
+}
+
+.caption-capital {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 10px;
+  color: $gray;
+}
+
+.caption-capital-1 {
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 10px;
+  color: $gray;
+}
