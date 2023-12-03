@@ -1,221 +1,149 @@
-* {
-  font-family: $fontFamily;
+body {
+  font-family: $fontFamily, $fontDefault;
+}
+
+.btn {
+  font-family: $fontFamily, $fontDefault;
+  background-color: transparent;
+  border-color: #ffffff;
+  display: inline-block;
+  line-height: 14px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 1px;
+  white-space: nowrap;
   font-size: 14px;
-  color: $black;
-}
+  border-radius: 30px;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  border: 3px solid;
+  max-height: 50px;
+  color: $aquamarine;
+  transition: all 0.5s ease-in-out;
 
-.h0 {
-  font-family: $fontFamily;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: auto;
-  color: $black;
-}
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    width: calc(40% - 1px);
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 3px solid;
+    border-color: inherit;
+    left: 0;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-right-color: transparent;
+  }
 
-.h1 {
-  font-family: $fontFamily;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
-  color: $black;
-}
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    width: calc(40% - 2px);
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 3px solid;
+    border-color: inherit;
+    right: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-left-color: transparent;
+  }
 
-.h1-1 {
-  font-family: $fontFamily;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: auto;
-  color: $black;
-}
+  span {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    height: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-color: inherit;
 
-.h2 {
-  font-family: $fontFamily;
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 35px;
-  color: $black;
-}
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      margin-left: -30px;
+      height: 60px;
+      width: 60px;
+      box-sizing: border-box;
+      border: 3px solid;
+      border-radius: 50%;
+      background-color: transparent;
+      border-color: $aquamarine;
+      transition: all 0.5s ease-in-out;
+    }
 
-.h3-capital {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 30px;
-  color: $black;
-}
+    &:first-child {
+      top: -18px;
 
-.h4-capital {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 25px;
-  color: $black;
-}
+      &::before {
+        top: 3px;
+      }
+    }
 
-.subtitle-1 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 35px;
-  color: $black;
-}
+    &:last-child {
+      bottom: -18px;
 
-.subtitle-2 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 30px;
-  color: $black;
-}
+      &::before {
+        bottom: 3px;
+      }
+    }
+  }
 
-.subtitle-3 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 30px;
-  color: $black;
-}
+  &__large {
+    width: 270px;
+    font-size: 26px;
+    line-height: 50px;
+    margin: 20px 0;
+    border: 0;
+    span {
+      height: 18px;
+      &::before {
+        margin-left: -40px;
+        height: 80px;
+        width: 80px;
+        background-color: transparent;
+        border-color: $aquamarine;
+      }
 
-.subtitle-2-strikethrough {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 30px;
-  color: $black;
-  text-decoration: line-through;
-}
+      &:first-child {
+        top: -18px;
+      }
+    }
+  }
 
-.bttn-capital-accent {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 30px;
-  color: $white;
-}
-
-.cost-capital {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 30px;
-  color: $black;
-
-  &--red {
-    color: $red;
+  &:hover {
+    color: red;
+    background-color: black;
+    border-color: black;
+    span {
+      &::before {
+        background-color: black;
+        border-color: black;
+      }
+    }
   }
 }
 
-.cost-capital-1 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 30px;
-  color: $black;
-}
-
-.body-1 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 25px;
-  color: $black;
-}
-
-.body-1-1 {
-  font-family: $fontFamily;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 25px;
-  color: $black;
-}
-
-.body-1-1-txt {
-  font-family: $fontFamily;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 30px;
-  color: $black;
-}
-
-.body-2 {
-  font-family: $fontFamily;
-  font-weight: 500;
+.input {
+  display: inline-block;
+  font-family: $fontFamily, $fontDefault;
+  background-color: #fff;
   font-size: 14px;
-  line-height: 25px;
-  color: $black;
-}
-
-.body-2-1 {
-  font-family: $fontFamily;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 25px;
-  color: $black;
-}
-
-.body-3-underline {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 25px;
-  color: $black;
-  text-decoration: underline;
-}
-
-.body-4-underline {
-  font-family: $fontFamily;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 25px;
-  color: $black;
-  text-decoration: underline;
-}
-
-.body-4-capital {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: $gray;
-}
-
-.caption {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: $black;
-}
-
-.caption-1 {
-  font-family: $fontFamily;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
-  color: $gray;
-}
-
-.link-underline {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: $gray;
-  text-decoration: underline;
-}
-
-.caption-capital {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  color: $gray;
-}
-
-.caption-capital-1 {
-  font-family: $fontFamily;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 10px;
-  color: $gray;
+  padding: 0 10px;
+  border: 1px solid #edecec;
+  max-width: 100%;
+  min-width: 160px;
+  min-height: 42px;
+  border-radius: 6px;
+  margin-bottom: 20px;
 }

@@ -1,26 +1,18 @@
 @font-face {
-  font-family: "Grtsk Peta";
-  src: url("../fonts/GrtskPeta-Bold.woff2") format("woff2"),
-    url("../fonts/GrtskPeta-Bold.woff") format("woff");
-  font-weight: 700;
+  font-family: 'Nexa Script';
+  src: url('../fonts/NexaScript-Light.woff2') format('woff2'),
+      url('../fonts/NexaScript-Light.woff') format('woff');
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Grtsk Peta";
-  src: url("../fonts/GrtskPeta-Regular.woff2") format("woff2"),
-    url("../fonts/GrtskPeta-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'Berling Antiqua';
+  src: url('../fonts/BerlingAntiqua-Italic.woff2') format('woff2'),
+      url('../fonts/BerlingAntiqua-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Grtsk Peta";
-  src: url("../fonts/GrtskPeta-Medium.woff2") format("woff2"),
-    url("../fonts/GrtskPeta-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
