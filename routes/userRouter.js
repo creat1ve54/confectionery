@@ -9,6 +9,7 @@ router.post("/login", userController.login);
 //registration
 router.post("/registration", userController.registration);
 // get me
-router.get("/me", authMiddleware, userController.getMe);
+// router.get("/me", authMiddleware, userController.getMe);
+router.get("/me", userController.getMe);
 
 module.exports = router;

@@ -2,6 +2,16 @@ body {
   font-family: $fontFamily, $fontDefault;
 }
 
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1210px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
 .btn {
   font-family: $fontFamily, $fontDefault;
   background-color: transparent;
@@ -45,7 +55,7 @@ body {
     z-index: 1;
     top: 0;
     height: 100%;
-    width: calc(40% - 2px);
+    width: calc(40%);
     box-sizing: border-box;
     overflow: hidden;
     border: 3px solid;
@@ -146,4 +156,21 @@ body {
   min-height: 42px;
   border-radius: 6px;
   margin-bottom: 20px;
+}
+
+.border-custom {
+  &::before {
+    content: "";
+    background-image: url("../assets/svg/border-custom__decor.jpg");
+    width: 87px;
+    height: 36px;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

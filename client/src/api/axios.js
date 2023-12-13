@@ -14,7 +14,7 @@ export const usersAPI = {
     return instance.post("/user/registration", { user });
   },
   login(login, password) {
-    return instance.post("/user/login", {login, password});
+    return instance.post("/user/login", { login, password });
   },
   getMe() {
     return instance.get("/user/me");

@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="app">
       <div className="app__body">
-        aaa
         <Routs />
       </div>
     </div>
