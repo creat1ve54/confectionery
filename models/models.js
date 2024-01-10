@@ -1,43 +1,56 @@
-const sequelize = require('../db')
-const { DataTypes } = require('sequelize')
+const sequelize = require("../db");
+const { DataTypes } = require("sequelize");
 
+const Admin = sequelize.define("admin", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  userName: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: true,
+    defaultValue: "",
+  },
+  password: { type: DataTypes.STRING, allowNull: true, defaultValue: "" },
+});
 
-const Role = sequelize.define('role', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    value: { type: DataTypes.STRING, unique: true, defaultValue: 'USER' },
-})
+const Card = sequelize.define("card", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  cardName: { type: DataTypes.STRING, allowNull: true, defaultValue: "" },
+  cardNameTranslate: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: "",
+  },
+  price: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
+  priceSale: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+  rating: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+  tags: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "",
+  },
+  category: { type: DataTypes.STRING, allowNull: true, defaultValue: "" },
+  description: { type: DataTypes.STRING, allowNull: false, defaultValue: "" },
+  count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+  photos: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "",
+  },
+});
 
+//связующая таблица
+const TypeCard = sequelize.define("type_card", {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+});
 
-const User = sequelize.define('user', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    login: { type: DataTypes.STRING, unique: true, allowNull: false },
-    password: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, unique: true, allowNull: false },
-    lastName: { type: DataTypes.STRING, FallowNull: false },
-    firstName: { type: DataTypes.STRING, allowNull: false },
-    middleName: { type: DataTypes.STRING, allowNull: false },
-    previousSurname: { type: DataTypes.STRING, defaultValue: '' },
-    dataOfBirth: { type: DataTypes.STRING, defaultValue: '' },
-    phone: { type: DataTypes.STRING, allowNull: false },
-    phoneSecond: { type: DataTypes.STRING, defaultValue: '' },
-    passport: { type: DataTypes.STRING, defaultValue: '' },
-    dataOfIssue: { type: DataTypes.STRING, defaultValue: '' },
-    residenceAddress: { type: DataTypes.STRING, defaultValue: '' },
-    residentialAddress: { type: DataTypes.STRING, defaultValue: '' },
-    whoIssuedThePassport: { type: DataTypes.STRING, defaultValue: '' },
-    placeOfWorOrStudy: { type: DataTypes.STRING, defaultValue: '' },
-    officePhone: { type: DataTypes.STRING, defaultValue: '' },
-    positionOrSpecialty: { type: DataTypes.STRING, defaultValue: '' },
-    howDidYouFindOut: { type: DataTypes.STRING, defaultValue: '' },
-    roles: { type: DataTypes.ARRAY(DataTypes.STRING) },
-})
+// Role.hasOne(User);
+// User.belongsTo(Role);
 
-
-
-Role.hasOne(User)
-User.belongsTo(Role)
+Admin.belongsToMany(Card, { through: TypeCard }); //Многие ко многим
+Card.belongsToMany(Admin, { through: TypeCard });
 
 module.exports = {
-    User,
-    Role,
-}
+  Admin,
+  Card,
+  TypeCard,
+};

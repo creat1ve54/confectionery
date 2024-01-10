@@ -170,6 +170,8 @@ input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
+
+
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -189,6 +191,7 @@ input[type="radio"] {
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   height: auto;
 }
 input[type="search"] {

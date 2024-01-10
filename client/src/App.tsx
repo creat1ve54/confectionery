@@ -1,13 +1,15 @@
-import React from "react";
-import { usersAPI } from "./api/axios";
+import React, { useEffect } from "react";
+// import { useDispatch } from "react-redux";
 import Routs from "./routs/Routs";
+import { checkAdminThunk } from "./redux/admin/adminSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
-function App() {
-  const onLogin = async () => {
-    for (let index = 0; index < 11; index++) {
-      let { data } = await usersAPI.login();
-    }
-  };
+const App = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(checkAdminThunk());
+  }, [dispatch]);
+
   return (
     <div className="app">
       <div className="app__body">
@@ -15,6 +17,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

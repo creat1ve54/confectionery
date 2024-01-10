@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const translitRusEng = require("translit-rus-eng");
+// const translitRusEng = require("translit-rus-eng");
 const login = async (req, res) => {
   // let transporter = nodemailer.createTransport({
   //   host: "smtp.mail.ru",
@@ -21,6 +21,7 @@ const login = async (req, res) => {
 
 const registration = async (req, res) => {
   res.send("respond with a resource");
+  
 };
 const getMe = async (req, res) => {
   let text = "Клапан запорный прямой PPR 20х1/2, РТП";
