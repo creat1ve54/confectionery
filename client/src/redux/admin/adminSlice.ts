@@ -9,6 +9,13 @@ export interface AdminInterface {
   isAuth: Boolean;
 }
 
+const initialState: AdminInterface = {
+  status: "",
+  token: "",
+  isLoading: false,
+  isAuth: false,
+};
+
 export const loginAdminThunk = createAsyncThunk(
   "admin/loginAdminThunk",
   async (admin) => {
@@ -24,13 +31,6 @@ export const checkAdminThunk = createAsyncThunk(
     return adminCheck;
   }
 );
-
-const initialState: AdminInterface = {
-  status: "",
-  token: "",
-  isLoading: false,
-  isAuth: false,
-};
 
 export const adminSlice = createSlice({
   name: "admin",

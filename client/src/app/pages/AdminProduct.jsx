@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 import {
   createCardThunk,
   getCardsThunk,
-  searchCardsThunk,
+  filterCardsThunk,
 } from "../../redux/cards/cardsSlice";
 import { useForm } from "react-hook-form";
 import { url } from "../../api/axios";
+import Product from "../components/Product";
 const AdminProduct = () => {
   const [search, setSearch] = useState("");
   const [cardName, setCardName] = useState("");
@@ -28,63 +29,44 @@ const AdminProduct = () => {
   const navigate = useNavigate();
   const [time, setTime] = useState(null);
 
-  const { isAuth } = useAppSelector((state) => state.adminSlice);
-
   const { cards, isLoading, status } = useAppSelector(
     (state) => state.cardsSlice
   );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const sendForm = () => {
-    try {
-      const data = new FormData();
-      data.append("cardName", cardName);
-      data.append("price", price);
-      data.append("priceSale", priceSale);
-      data.append("tags", tags);
-      data.append("category", category);
-      data.append("description", description);
-      data.append("count", count);
-      for (let index = 0; index < photos.length; index++) {
-        data.append("photos", photos[index]);
-      }
-      dispatch(createCardThunk(data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const searchCard = (e) => {
     setSearch(e.target.value);
     let search = e.target.value;
-    if (!search) {
-      search = "all";
-    }
-    if (time) {
-      clearTimeout(time);
-    }
-    setTime(
-      setTimeout(() => {
-        try {
-          dispatch(searchCardsThunk(search));
-        } catch (error) {
-          console.log(error);
-        }
-      }, 1000)
+    // if (!search) {
+    //   search = "all";
+    // }
+    dispatch(
+      filterCardsThunk({
+        text: search,
+        // tags: "",
+        // sort: "",
+      })
     );
+    // if (time) {
+    //   clearTimeout(time);
+    // }
+    // setTime(
+    //   setTimeout(() => {
+    //     try {
+    //       dispatch(
+    //         filterCardsThunk({
+    //           text: search,
+    //         })
+    //       );
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }, 800)
+    // );
   };
 
   useEffect(() => {
     dispatch(getCardsThunk());
-    if (!isAuth) {
-      navigate("/admin");
-    }
-  }, [isAuth]);
+  }, [dispatch]);
 
   return (
     <div className="admin-product">
@@ -105,7 +87,7 @@ const AdminProduct = () => {
                 onChange={searchCard}
               />
             </div>
-            {cards.map((card, index) => {
+            {cards ? cards.map((card, index) => {
               return (
                 <Link
                   to={`/admin-product/${card.cardNameTranslate}`}
@@ -123,139 +105,11 @@ const AdminProduct = () => {
                   </div>
                 </Link>
               );
-            })}
+            }): 'Товаров нет'}
           </div>
           <div className="admin-product__main-right">
             <div className="admin-product__main-add">
-              <div className="admin-product__main-add-title">
-                Добваить товар
-              </div>
-              <div className="admin-product__main-add-card">
-                <div className="admin-product__main-add-card-title">
-                  {/* Название товара */}
-                  <Input
-                    value={cardName}
-                    setValue={setCardName}
-                    placeholder="Название товара"
-                    type="input"
-                    valid={{
-                      ...register("cardName", {
-                        required: true,
-                      }),
-                    }}
-                  />
-                  {errors.cardName?.type === "required" && (
-                    <div style={{ color: "red", marginTop: "-15px" }}>
-                      Поле не должно быть пустое
-                    </div>
-                  )}
-                </div>
-                <div className="admin-product__main-add-card-title">
-                  <Input
-                    value={price}
-                    type="number"
-                    setValue={setPrice}
-                    placeholder="Цена товара"
-                    valid={{
-                      ...register("price", {
-                        required: true,
-                      }),
-                    }}
-                  />
-                  {errors.price?.type === "required" && (
-                    <div style={{ color: "red", marginTop: "-15px" }}>
-                      Поле не должно быть пустое
-                    </div>
-                  )}
-                </div>
-                {/* <div className="admin-product__main-add-card-title">
-                  <Input
-                    value={priceSale}
-                    setValue={setPriceSale}
-                    placeholder="Скидка"
-                  />
-                </div> */}
-                <div className="admin-product__main-add-card-title">
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={(e) => {
-                        setSale(e.target.checked);
-                      }}
-                      value={sale}
-                    />
-                    <span>Скидка на товар</span>
-                  </label>
-                  {sale && (
-                    <Input
-                      value={priceSale}
-                      setValue={setPriceSale}
-                      placeholder="Цена старая"
-                    />
-                  )}
-                </div>
-                <div className="admin-product__main-add-card-title">
-                  <Input
-                    typeInput="textarea"
-                    value={description}
-                    setValue={setDescription}
-                    placeholder="Описание товара"
-                  />
-                  {/* <textarea /> */}
-                </div>
-                <div className="admin-product__main-add-card-title">
-                  Теги
-                  {/* <Input value={tags} setValue={setTags} placeholder="Теги" /> */}
-                </div>
-                <div className="admin-product__main-add-card-title">
-                  Категория
-                  <Input
-                    value={category}
-                    setValue={setCategory}
-                    placeholder="Категория"
-                    valid={{
-                      ...register("category", {
-                        required: true,
-                      }),
-                    }}
-                  />
-                  {errors.category?.type === "required" && (
-                    <div style={{ color: "red", marginTop: "-15px" }}>
-                      Поле не должно быть пустое
-                    </div>
-                  )}
-                </div>
-                <div className="admin-product__main-add-card-title">
-                  Фото
-                  <label>
-                    <input
-                      // style={{ display: "none" }}
-                      {...register("photos", {
-                        required: true,
-                      })}
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      // value={photos}
-                      onChange={(e) => {
-                        // setPhotos([...e.target.files]);
-                        setPhotos(e.target.files);
-                      }}
-                    />
-                    {errors.photos?.type === "required" && (
-                      <div style={{ color: "red" }}>
-                        Поле не должно быть пустое
-                      </div>
-                    )}
-                    {/* <div>Добавить фото</div> */}
-                  </label>
-                </div>
-                <Button
-                  onClick={handleSubmit(sendForm)}
-                  type="submit"
-                  text="Создать"
-                />
-              </div>
+              <Product />
             </div>
           </div>
         </div>

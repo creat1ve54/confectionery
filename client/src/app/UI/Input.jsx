@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import IMask from "imask";
 
 const Input = ({
   setValue,
@@ -8,7 +9,23 @@ const Input = ({
   typeInput,
   type,
   onChange,
+  maskClass,
+  maskOptions,
+  mask,
 }) => {
+  useEffect(() => {
+    if (mask) {
+      const maskOpt = {
+        mask: maskOptions,
+      };
+      document.querySelectorAll(`.${maskClass}`).forEach((item) => {
+        if (item) {
+          const mask = IMask(item, maskOpt);
+        }
+      });
+    }
+  });
+
   return (
     <>
       {typeInput == "textarea" ? (
@@ -25,7 +42,7 @@ const Input = ({
       ) : onChange ? (
         <input
           type={type}
-          className="input"
+          className={maskClass ? "input " + maskClass : "input"}
           {...valid}
           placeholder={placeholder}
           onChange={onChange}
@@ -34,7 +51,7 @@ const Input = ({
       ) : (
         <input
           type={type}
-          className="input"
+          className={maskClass ? "input " + maskClass : "input"}
           {...valid}
           placeholder={placeholder}
           onChange={(e) => {

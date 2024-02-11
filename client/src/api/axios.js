@@ -42,19 +42,23 @@ export const cardAPI = {
   create(card) {
     return instance.post("/card", card);
   },
-  delete() {
-    return instance.get("/card");
+  delete(id) {
+    return instance.delete(`/card/${id}`);
   },
-  edit() {
-    return instance.get("/card");
+  edit(card) {
+    return instance.put("/card", card);
   },
   getCards() {
-    return instance.get("/card");
+    return instance.get(`/card`);
   },
   getCard(cardNameTranslate) {
     return instance.get(`/card/${cardNameTranslate}`);
   },
-  searchCards(text) {
-    return instance.get(`/card/search/${text}`);
+  filterCards(filter) {
+    return instance.get(
+      `/card/filter?text=${filter.text || ""}&tags=${filter.tags || ""}&sort=${
+        filter.sort || ""
+      }`
+    );
   },
 };

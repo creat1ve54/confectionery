@@ -46,11 +46,27 @@ export const getCardThunk = createAsyncThunk(
   }
 );
 
-export const searchCardsThunk = createAsyncThunk(
-  "cards/searchCardsThunk",
-  async (text) => {
-    const seatchCards = (await cardAPI.searchCards(text)).data;
-    return seatchCards;
+export const filterCardsThunk = createAsyncThunk(
+  "cards/filterCardsThunk",
+  async (filter) => {
+    const filterCards = (await cardAPI.filterCards(filter)).data;
+    return filterCards;
+  }
+);
+
+export const deleteCardsThunk = createAsyncThunk(
+  "cards/deleteCardsThunk",
+  async (id) => {
+    const deleteCard = (await cardAPI.delete(id)).data;
+    return deleteCard;
+  }
+);
+
+export const editCardThunk = createAsyncThunk(
+  "cards/editCardThunk",
+  async (card) => {
+    const editCard = (await cardAPI.edit(card)).data;
+    return editCard;
   }
 );
 
@@ -82,6 +98,7 @@ export const cardsSlice = createSlice({
     });
     builder.addCase(createCardThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
+      console.log(action.payload.card);
       state.cards.push(action.payload.card);
       state.isLoading = false;
     });
@@ -101,13 +118,29 @@ export const cardsSlice = createSlice({
       state.card = action.payload.card;
       state.isLoading = false;
     });
-    builder.addCase(searchCardsThunk.pending, (state, action) => {
+    builder.addCase(filterCardsThunk.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(searchCardsThunk.fulfilled, (state, action) => {
+    builder.addCase(filterCardsThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
       state.cards = action.payload.cards;
       state.isLoading = false;
+    });
+    builder.addCase(deleteCardsThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteCardsThunk.fulfilled, (state, action) => {
+      state.status = action.payload.message;
+      state.cards = action.payload.cards;
+      state.isLoading = false;
+    });
+    builder.addCase(editCardThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editCardThunk.fulfilled, (state, action) => {
+      state.status = action.payload.message;
+      // state.cards = action.payload.cards;
+      // state.isLoading = false;
     });
   },
 });

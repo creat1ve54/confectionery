@@ -8,9 +8,10 @@ router.post("/", authMiddleware, cardControll.create);
 
 router.delete("/:id", authMiddleware, cardControll.delete);
 
-router.put("/:id", authMiddleware, cardControll.edit);
+router.put("/", authMiddleware, cardControll.edit);
 
-router.get("/search/:text", cardControll.searchCards);
+// router.get("/filter/:text/:tags/:sort", cardControll.filterCards);
+router.get("/filter", cardControll.filterCards);
 
 router.get("/", cardControll.getCards);
 

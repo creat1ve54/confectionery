@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getCardThunk } from "../../redux/cards/cardsSlice";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
-import Product from "../components/Product";
+import { getCardThunk } from "../../redux/cards/cardsSlice";
 
-const AdminProductCard = () => {
+const CardDetail = () => {
   const params = useParams();
   const { cardNameTranslate } = params;
   const dispatch = useDispatch();
@@ -15,9 +14,8 @@ const AdminProductCard = () => {
 
   useEffect(() => {
     dispatch(getCardThunk(cardNameTranslate));
-  }, [dispatch, cardNameTranslate]);
-
-  return <Product card={card} />;
+  }, []);
+  return <div>{card.cardName}</div>;
 };
 
-export default AdminProductCard;
+export default CardDetail;

@@ -1,0 +1,40 @@
+.catalog {
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  &__count {
+    font-size: 17px;
+  }
+
+  &__container {
+    display: flex;
+    column-gap: 15px;
+  }
+
+  &__left {
+    flex: 1 1 auto;
+  }
+
+  &__right {
+    flex: 1 1 auto;
+    max-width: 270px;
+  }
+
+  &__tags {
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+}
