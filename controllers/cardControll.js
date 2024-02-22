@@ -1,4 +1,4 @@
-const { Card } = require("../models/models");
+const { Card, Tags } = require("../models/models");
 const path = require("node:path");
 const uuid = require("uuid");
 const translitRusEng = require("translit-rus-eng");
@@ -24,28 +24,34 @@ class CardControll {
         cardName,
         price,
         priceSale,
-        tags,
+        tag,
         category,
         description,
         count,
         // photos,
       } = req.body;
-      let newPhotos = "";
+
+      // let newPhotos = "";
+      let newPhotos = [];
       if (req.files) {
         if (!req.files.photos.length) {
           let photo = req.files.photos;
           let fileName = uuid.v4() + "." + photo.name.split(".")[1];
-          newPhotos = newPhotos + fileName + ", ";
+          // newPhotos = newPhotos + fileName + ", ";
+          newPhotos.push(fileName);
           photo.mv(path.resolve(__dirname, "..", "static", fileName));
         } else {
           req.files.photos.forEach((photo) => {
             let fileName = uuid.v4() + photo.name.split(".")[1];
-            newPhotos = newPhotos + fileName + ", ";
+            // newPhotos = newPhotos + fileName + ", ";
+            newPhotos.push(fileName);
             photo.mv(path.resolve(__dirname, "..", "static", fileName));
           });
         }
       }
 
+
+      let tagNumber = Number(tag);
       const card = await Card.create({
         cardName,
         cardNameTranslate: translitRusEng(cardName, {
@@ -53,12 +59,15 @@ class CardControll {
         }).toLowerCase(),
         price,
         priceSale,
-        tags,
+        // tags,
+        tagId: tagNumber,
         category,
         description,
         count,
         photos: newPhotos,
       });
+
+
       res.json({ card, message: "Карточа создана" });
     } catch (error) {
       res.json({ message: "Ошибка при создании" });
@@ -69,7 +78,8 @@ class CardControll {
     try {
       const { id } = req.params;
       const card = await Card.destroy({ where: { id } });
-      res.json({ card, message: "Карточка удалена" });
+      let cards = await Card.findAll();
+      res.json({ cards, message: "Карточка удалена" });
     } catch (error) {
       res.json({ message: "Ошибка при удалении" });
     }
@@ -82,7 +92,7 @@ class CardControll {
         cardName,
         price,
         priceSale,
-        tags,
+        tag,
         category,
         description,
         count,
@@ -91,17 +101,21 @@ class CardControll {
 
       const card = await Card.findOne({ where: { id: id } });
 
-      let newPhotos = "";
+      let newPhotos = [];
+
+
       if (req.files) {
         if (!req.files.photos.length) {
           let photo = req.files.photos;
           let fileName = uuid.v4() + "." + photo.name.split(".")[1];
-          newPhotos = newPhotos + fileName + ", ";
+          // newPhotos = newPhotos + fileName + ", ";
+          newPhotos.push(fileName);
           photo.mv(path.resolve(__dirname, "..", "static", fileName));
         } else {
           req.files.photos.forEach((photo) => {
             let fileName = uuid.v4() + photo.name.split(".")[1];
-            newPhotos = newPhotos + fileName + ", ";
+            // newPhotos = newPhotos + fileName + ", ";
+            newPhotos.push(fileName);
             photo.mv(path.resolve(__dirname, "..", "static", fileName));
           });
         }
@@ -109,13 +123,15 @@ class CardControll {
         card.photos = newPhotos;
       }
 
+      let tagNumber = Number(tag);
+
       card.cardName = cardName;
       card.cardNameTranslate = translitRusEng(cardName, {
         slug: true,
       }).toLowerCase();
       card.price = price;
       card.priceSale = priceSale;
-      card.tags = tags;
+      card.tagId = tagNumber;
       card.category = category;
       card.description = description;
       card.count = count;
@@ -128,12 +144,13 @@ class CardControll {
 
   async filterCards(req, res) {
     try {
-      // const { text, tags, sort } = req.params;
       const { text, tags, sort } = req.query;
+
       let tagsArray = "";
       if (tags) {
         tagsArray = tags.split(",");
       }
+
       let cards;
 
       if (tagsArray) {
@@ -141,7 +158,7 @@ class CardControll {
           where: {
             [Op.and]: {
               cardName: { [Op.iLike]: `%${text}%` },
-              tags: tagsArray,
+              tagId: tagsArray,
             },
           },
           order: [sortFn(sort)],
@@ -183,7 +200,7 @@ class CardControll {
     try {
       const { cardNameTranslate } = req.params;
       const card = await Card.findOne({ where: { cardNameTranslate } });
-      // console.log(card);
+      // const tag = await Tags.findOne({ where: { id: card.tagId } });
       res.json({ card, message: "Карточка получена" });
     } catch (error) {
       res.json({ message: "Ошибка при получении" });
