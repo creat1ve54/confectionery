@@ -44,7 +44,8 @@ h3 {
 
 .container {
   max-width: 1210px;
-  padding: 0 20px;
+  padding: 50 20px;
+  padding-top: 30px;
   margin: 0 auto;
 }
 
@@ -69,7 +70,7 @@ h3 {
   transition: all 0.5s ease-in-out;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 1;
     top: 0;
@@ -86,7 +87,7 @@ h3 {
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 1;
     top: 0;
@@ -113,7 +114,7 @@ h3 {
     border-color: inherit;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 1;
       left: 50%;
@@ -203,8 +204,8 @@ h3 {
   border-radius: 20px;
 
   &::before {
-    content: "";
-    background-image: url("../assets/svg/border-custom__decor.jpg");
+    content: '';
+    background-image: url('../assets/svg/border-custom__decor.jpg');
     width: 87px;
     height: 36px;
     display: inline-block;
@@ -226,7 +227,7 @@ h3 {
     color: #ffffff;
     &:not(:first-child) {
       &::before {
-        content: "/";
+        content: '/';
         margin: 0px 5px;
       }
     }
@@ -236,8 +237,8 @@ h3 {
 .main-banner {
   margin-bottom: 80px;
   height: 340px;
-  background-image: url("../assets/images/main-banner-bg.jpg");
-  mask-image: url("../assets/images/skeleton-banner.svg");
+  background-image: url('../assets/images/main-banner-bg.jpg');
+  mask-image: url('../assets/images/skeleton-banner.svg');
   mask-position: bottom;
   mask-size: cover;
   mask-repeat: no-repeat;
