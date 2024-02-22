@@ -1,11 +1,12 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import "variables.scss";
-@import "default.scss";
-@import "fonts.scss";
-@import "reset.scss";
+@import 'variables.scss';
+@import 'default.scss';
+@import 'fonts.scss';
+@import 'reset.scss';
 
 //components
-@import "./components/header.scss";
-@import "./components/admin.scss";
-@import "./components/adminProduct.scss";
-@import "./components/catalog.scss";
+@import './components/header.scss';
+@import './components/footer.scss';
+@import './components/admin.scss';
+@import './components/adminProduct.scss';
+@import './components/catalog.scss';
