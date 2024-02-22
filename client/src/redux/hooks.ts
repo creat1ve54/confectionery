@@ -6,5 +6,5 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const convector = (value: any) => {
-  return value.toLocaleString() + '₽';
+  return value?.toLocaleString() + '₽';
 };

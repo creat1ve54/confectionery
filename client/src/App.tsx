@@ -4,6 +4,9 @@ import { checkAdminThunk } from "./redux/admin/adminSlice";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import AppRouter from "./routs/AppRouts";
 
+
+
+
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {

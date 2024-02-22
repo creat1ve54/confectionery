@@ -9,6 +9,7 @@ const Input = ({
   typeInput,
   type,
   onChange,
+  onKeyDown,
   maskClass,
   maskOptions,
   mask,
@@ -46,6 +47,7 @@ const Input = ({
           {...valid}
           placeholder={placeholder}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           value={value == 0 ? "" : value}
         />
       ) : (
@@ -57,6 +59,7 @@ const Input = ({
           onChange={(e) => {
             setValue(e.target.value);
           }}
+          onKeyDown={onKeyDown}
           value={value == 0 ? "" : value}
         />
       )}

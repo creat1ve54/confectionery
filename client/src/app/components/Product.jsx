@@ -11,10 +11,13 @@ import {
   editCardThunk,
   getCardsThunk,
   filterCardsThunk,
+  deleteTagThunk,
+  createTagsThunk,
 } from "../../redux/cards/cardsSlice";
 import { useForm } from "react-hook-form";
+import Select from "../UI/Select";
 
-const Product = ({ card }) => {
+const Product = ({ card, tagsArray }) => {
   const [cardName, setCardName] = useState("");
   const [cardNameTranslate, setCardNameTranslate] = useState("");
   const [price, setPrice] = useState(0);
@@ -22,21 +25,31 @@ const Product = ({ card }) => {
   const [priceSale, setPriceSale] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [tags, setTags] = useState("Кексы, Торты");
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState({ id: 0, tag: "Выберите тег" });
   const [count, setCount] = useState(0);
   const [photos, setPhotos] = useState("");
   const [oldPhotos, setOldPhotos] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [formValid, setFormValid] = useState("");
+
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitted },
   } = useForm();
 
   useEffect(() => {
+    let activeTag = tagsArray.filter((tag) => !tags.includes(tag));
+    if (activeTag.length == 1) {
+      setActiveTag({ id: activeTag[0].id, tag: activeTag[0].tag });
+    }
+    setTags(tagsArray);
+
     if (card && card.id != 0) {
       setCardName(card.cardName);
       setCardNameTranslate(card.cardNameTranslate);
@@ -52,9 +65,21 @@ const Product = ({ card }) => {
       if (card.photos) {
         setOldPhotos(card.photos);
       }
-
       setPriceSale(card.priceSale);
-      setTags(card.tags);
+      // let tagsArrayNew = [];
+      // tagsArray.forEach((tag) => {
+      //   tagsArrayNew.push(tag.tag);
+      // });
+      // setTags(tagsArrayNew);
+
+      // setActiveTag
+
+      tagsArray.forEach((tag) => {
+        if (tag.id === card.tagId) {
+          setActiveTag({ id: tag.id, tag: tag.tag });
+        }
+      });
+
       setValue("cardName", card.cardName);
       setValue("cardNameTranslate", card.cardNameTranslate);
       setValue("category", card.category);
@@ -62,26 +87,37 @@ const Product = ({ card }) => {
       setValue("description", card.description);
       setValue("price", card.price);
       setValue("priceSale", card.priceSale);
-      setValue("tags", card.tags);
+      setValue("tag", card.tag);
     }
-  }, [card]);
+  }, [card, tagsArray]);
+
+  const onDeleteTag = (item) => {
+    let tag = tagsArray.filter((tag) => tag.id === item.id);
+    setActiveTag({ id: 0, tag: "Выберите тег" });
+    dispatch(deleteTagThunk(tag[0].id));
+  };
 
   const sendForm = () => {
     try {
-      const data = new FormData();
-      data.append("cardName", cardName);
-      data.append("price", price);
-      data.append("priceSale", priceSale);
-      data.append("tags", tags);
-      data.append("category", category);
-      data.append("description", description);
-      data.append("count", count);
-      if (photos) {
-        for (let index = 0; index < photos.length; index++) {
-          data.append("photos", photos[index]);
+      if (activeTag.id !== 0) {
+        debugger
+        const data = new FormData();
+        data.append("cardName", cardName);
+        data.append("price", price);
+        data.append("priceSale", priceSale);
+        // data.append("tags", tags);
+        data.append("tag", activeTag.id);
+        data.append("category", category);
+        data.append("description", description);
+        data.append("count", count);
+        if (photos) {
+          for (let index = 0; index < photos.length; index++) {
+            data.append("photos", photos[index]);
+          }
         }
+
+        dispatch(createCardThunk(data));
       }
-      dispatch(createCardThunk(data));
     } catch (error) {
       console.log(error);
     }
@@ -93,10 +129,11 @@ const Product = ({ card }) => {
       if (card && card.id != 0) {
         data.append("id", card.id);
       }
+
       data.append("cardName", cardName);
       data.append("price", price);
       data.append("priceSale", priceSale);
-      data.append("tags", tags);
+      data.append("tag", activeTag.id);
       data.append("category", category);
       data.append("description", description);
       data.append("count", count);
@@ -121,6 +158,22 @@ const Product = ({ card }) => {
     }
   };
 
+  const onKeySelect = (e) => {
+    if (e.keyCode == 13 && e.target.value != "") {
+      // setTags((oldTags) => [...oldTags, e.target.value]);
+      // setTag("");
+      // setActiveTag({ id: tag.id, tag: tag.tag });
+      // setActiveTag({ tag: e.target.value });
+      // console.log(e);
+      dispatch(createTagsThunk(e.target.value));
+    } else {
+    }
+  };
+
+  const clickSelect = (item) => {
+    setActiveTag(item);
+  };
+
   return (
     <>
       <div className="admin-product__main-add-title">
@@ -138,7 +191,7 @@ const Product = ({ card }) => {
       <div className="admin-product__main-add-card">
         {card && (
           <img
-            src={`http://localhost:8000/${oldPhotos.split(",")[0]}`}
+            src={`http://localhost:8000/${oldPhotos[0]}`}
             alt="oldPhotos"
           />
         )}
@@ -216,6 +269,23 @@ const Product = ({ card }) => {
         </div>
         <div className="admin-product__main-add-card-title">
           Теги
+          <Select
+            active={activeTag}
+            items={tags}
+            itemsKey={"tag"}
+            inputPlaceholder={"Найти или добавить тег"}
+            inputValue={tag}
+            setInputValue={setTag}
+            setActive={setActiveTag}
+            onClick={clickSelect}
+            onKeyDown={onKeySelect}
+            onDelete={onDeleteTag}
+          />
+          {activeTag.id === 0 && isSubmitted ? (
+            <div style={{ color: "red" }}>Выберите тег</div>
+          ) : (
+            ""
+          )}
           {/* <Input value={tags} setValue={setTags} placeholder="Теги" /> */}
         </div>
         <div className="admin-product__main-add-card-title">

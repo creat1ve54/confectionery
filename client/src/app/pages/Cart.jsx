@@ -10,7 +10,7 @@ const Cart = () => {
     <div className="cart">
       <MainBanner name={"Корзина"} />
       {cart.map((el) => (
-        <div>{el.cardName}</div>
+        <div key={el.id}>{el.cardName}</div>
       ))}
     </div>
   );

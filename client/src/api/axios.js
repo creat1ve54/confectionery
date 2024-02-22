@@ -62,3 +62,18 @@ export const cardAPI = {
     );
   },
 };
+
+export const tagsAPI = {
+  create(tag) {
+    return instance.post("/tags", { tag: tag });
+  },
+  delete(id) {
+    return instance.delete(`/tags/${id}`);
+  },
+  getAll() {
+    return instance.get(`/tags/all`);
+  },
+  getTag(id) {
+    return instance.get(`/tags/${id}`);
+  },
+};

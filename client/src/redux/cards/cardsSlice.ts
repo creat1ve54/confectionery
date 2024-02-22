@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { cardAPI } from "../../api/axios";
+import { cardAPI, tagsAPI } from "../../api/axios";
+import { WritableDraft } from "immer/dist/internal";
 
 export interface CardInterface {
   id: number;
@@ -8,17 +9,23 @@ export interface CardInterface {
   cardNameTranslate: string;
   price: number;
   rating: number;
-  tags: string;
+  tagId: number;
   category: string;
   description: string;
   count: number;
   photos: string;
 }
 
+export interface TagsInterface {
+  id: number;
+  tag: string;
+}
+
 export interface CardsInterface {
   cards: CardInterface[];
   card: CardInterface;
   status: String;
+  tags: TagsInterface[];
   isLoading: Boolean;
 }
 
@@ -49,6 +56,7 @@ export const getCardThunk = createAsyncThunk(
 export const filterCardsThunk = createAsyncThunk(
   "cards/filterCardsThunk",
   async (filter) => {
+    // console.log(filter);
     const filterCards = (await cardAPI.filterCards(filter)).data;
     return filterCards;
   }
@@ -70,6 +78,32 @@ export const editCardThunk = createAsyncThunk(
   }
 );
 
+export const createTagsThunk = createAsyncThunk(
+  "tags/createTagsThunk",
+  async (tag) => {
+    const tagsCreate = (await tagsAPI.create(tag)).data;
+    return tagsCreate;
+  }
+);
+
+export const getAllThunk = createAsyncThunk("tags/getAllThunk", async () => {
+  const getAll = (await tagsAPI.getAll()).data;
+  return getAll;
+});
+
+// export const getTagThunk = createAsyncThunk("tags/getTagThunk", async (id) => {
+//   const getTag = (await tagsAPI.getTag(id)).data;
+//   return getTag;
+// });
+
+export const deleteTagThunk = createAsyncThunk(
+  "tags/deleteTagThunk",
+  async (id) => {
+    const deleteTag = (await tagsAPI.delete(id)).data;
+    return deleteTag;
+  }
+);
+
 const initialState: CardsInterface = {
   cards: [],
   card: {
@@ -82,8 +116,9 @@ const initialState: CardsInterface = {
     photos: "",
     price: 0,
     rating: 0,
-    tags: "",
+    tagId: 0,
   },
+  tags: [],
   status: "",
   isLoading: false,
 };
@@ -98,7 +133,6 @@ export const cardsSlice = createSlice({
     });
     builder.addCase(createCardThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
-      console.log(action.payload.card);
       state.cards.push(action.payload.card);
       state.isLoading = false;
     });
@@ -109,6 +143,12 @@ export const cardsSlice = createSlice({
       state.status = action.payload.message;
       state.cards = action.payload.cards;
       state.isLoading = false;
+
+      if (action.payload.cards.length === 0) {
+        localStorage.setItem("cart", JSON.stringify([]));
+        localStorage.setItem("cartResult", JSON.stringify(0));
+      }
+      
     });
     builder.addCase(getCardThunk.pending, (state, action) => {
       state.isLoading = true;
@@ -116,6 +156,7 @@ export const cardsSlice = createSlice({
     builder.addCase(getCardThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
       state.card = action.payload.card;
+      // state.card.tag = action.payload.tagName;
       state.isLoading = false;
     });
     builder.addCase(filterCardsThunk.pending, (state, action) => {
@@ -131,6 +172,7 @@ export const cardsSlice = createSlice({
     });
     builder.addCase(deleteCardsThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
+      console.log(action.payload.cards);
       state.cards = action.payload.cards;
       state.isLoading = false;
     });
@@ -139,8 +181,44 @@ export const cardsSlice = createSlice({
     });
     builder.addCase(editCardThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
-      // state.cards = action.payload.cards;
-      // state.isLoading = false;
+      state.cards = action.payload.cards;
+      state.isLoading = false;
+    });
+
+    builder.addCase(createTagsThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createTagsThunk.fulfilled, (state, action) => {
+      state.status = action.payload.message;
+
+      console.log(action.payload.tags);
+      state.tags.push(action.payload.tags);
+      state.isLoading = false;
+    });
+    builder.addCase(getAllThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllThunk.fulfilled, (state, action) => {
+      state.status = action.payload.message;
+      state.tags = action.payload.tags;
+      state.isLoading = false;
+    });
+    // builder.addCase(getTagThunk.pending, (state, action) => {
+    //   state.isLoading = true;
+    // });
+    // builder.addCase(getTagThunk.fulfilled, (state, action) => {
+    //   state.status = action.payload.message;
+    //   state.card = action.payload.card;
+    //   state.card.tags = action.payload.tagName;
+    //   state.isLoading = false;
+    // });
+    builder.addCase(deleteTagThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteTagThunk.fulfilled, (state, action) => {
+      state.status = action.payload.message;
+      state.tags = action.payload.tags;
+      state.isLoading = false;
     });
   },
 });

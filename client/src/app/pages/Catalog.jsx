@@ -1,19 +1,21 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { getCardsThunk, filterCardsThunk } from "../../redux/cards/cardsSlice";
+import { Link, NavLink, useLocation, useParams } from "react-router-dom";
+import {
+  getCardsThunk,
+  filterCardsThunk,
+  getAllThunk,
+} from "../../redux/cards/cardsSlice";
 import { useDispatch } from "react-redux";
 import { convector, useAppSelector } from "../../redux/hooks";
 import StarRatings from "react-star-ratings";
-import Select from "../components/Select";
+import Select from "../UI/Select";
 import Input from "../UI/Input";
 import Pagination from "../components/Pagination";
 import MainBanner from "../components/MainBanner";
 const Catalog = () => {
-  const { cards, isLoading, status } = useAppSelector(
+  const { cards, tags, isLoading, status } = useAppSelector(
     (state) => state.cardsSlice
   );
-
-  // let newCards;
 
   const dispatch = useDispatch();
 
@@ -22,37 +24,46 @@ const Catalog = () => {
     "По умолчанию",
     "По возврастанию",
     "По убыванию",
-    "По популярности",
+    // "По популярности",
   ]);
   const [filterActive, setFilterActive] = useState("По умолчанию");
-  // const [time, setTime] = useState(null);
 
   const [limit, setLimit] = useState(4);
   const [page, setPage] = useState(1);
-  // let pages = 0;
 
   const lastItemsIndex = limit * page;
   const firstItemsIndex = lastItemsIndex - limit;
+
   let copyCards = cards.map((card) => ({ ...card }));
-  // let [currentItems, setCurrentItems] = useState();
   let currentItems;
   let [, setFake] = useState();
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cartResult = JSON.parse(localStorage.getItem("cartResult")) || 0;
 
-  // console.log(newCards);
-
-  // console.log(cards);
-
-  // if (cards.length > 0) {
-  // console.log(cards);
-  // pages = Math.ceil(cards.length / limit);
-  // newCards = currentItems;
-  // console.log(newCards);
-  // }
-
-  if (cards) {
+  if (cards && cards.length > 0) {
+    // debugger
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartResult = 0;
+    let newCart = [];
+    // debugger
+    if (cart && cart.length > 0) {
+      newCart = cart.filter((el) => {
+        return cards.some((card) => {
+          return el.id === card.id;
+        });
+      });
+
+      newCart.forEach((el) => {
+        cartResult = cartResult + el.count * el.price;
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    localStorage.setItem("cartResult", JSON.stringify(cartResult));
+
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     if (cart) {
       copyCards.forEach((card) => {
         cart.forEach((item) => {
@@ -63,18 +74,17 @@ const Catalog = () => {
         });
       });
     }
-    // setCurrentItems(copyCards.slice(firstItemsIndex, lastItemsIndex));
     currentItems = copyCards.slice(firstItemsIndex, lastItemsIndex);
   }
 
-  let [tags, setTags] = useState([]);
+  let [tagsArray, setTagsArray] = useState([]);
   const clickSelect = (active) => {
     setFilterActive(active);
 
     dispatch(
       filterCardsThunk({
         text: search,
-        tags,
+        tags: tagsArray,
         sort: active,
       })
     );
@@ -83,73 +93,49 @@ const Catalog = () => {
   const searchCard = (e) => {
     setSearch(e.target.value);
     let search = e.target.value;
-    // if (time) {
-    //   clearTimeout(time);
-    // }
 
     dispatch(
       filterCardsThunk({
         text: search,
-        tags,
+        tags: tagsArray,
         sort: filterActive,
       })
     );
-
-    // setTime(
-    //   setTimeout(() => {
-    //     try {
-    //       dispatch(
-    //         filterCardsThunk({
-    //           text: search,
-    //           tags,
-    //           sort: filterActive,
-    //         })
-    //       );
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   }, 800)
-    // );
   };
 
   const onAddCart = useCallback((card) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartResult = JSON.parse(localStorage.getItem("cartResult")) || 0;
     cart.push(card);
     card.cart = true;
     card.count = 1;
-    // console.log(cart);
+
+    cartResult = cartResult + card.count * card.price;
+
+    // debugger
     localStorage.setItem("cart", JSON.stringify(cart));
-    // copyCards.forEach((card) => {
-    //   cart.forEach((item) => {
-    //     if (item.id === card.id) {
-    //       card.cart = true;
-    //     } else {
-    //       card.cart = false;
-    //     }
-    //   });
-    // });
-    // setCurrentItems(copyCards.slice(firstItemsIndex, lastItemsIndex));
+    localStorage.setItem("cartResult", JSON.stringify(cartResult));
     currentItems = copyCards.slice(firstItemsIndex, lastItemsIndex);
     setFake({});
   }, []);
 
-  const tagClick = (text, checked) => {
+  const tagClick = (id, checked) => {
     let newArray;
-    if (checked) {
-      tags.push(text);
-    } else {
-      newArray = tags.filter((item) => {
-        return item !== text;
-      });
 
-      tags = newArray;
-      setTags(newArray);
+    if (checked) {
+      tagsArray.push(id);
+    } else {
+      newArray = tagsArray.filter((item) => {
+        return item !== id;
+      });
+      tagsArray = newArray;
+      setTagsArray(newArray);
     }
 
     dispatch(
       filterCardsThunk({
         text: search,
-        tags,
+        tags: tagsArray,
         sort: filterActive,
       })
     );
@@ -157,19 +143,21 @@ const Catalog = () => {
 
   const onChangeCount = (change, id) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let cartResult = JSON.parse(localStorage.getItem("cartResult")) || 0;
     let newCard = cart;
-    // let newCard = cart.filter((item) => item.id === id);
-    // const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // console.log(newCard);
+
     if (change === "add") {
       newCard.forEach((el) => {
         if (el.id === id) {
+          cartResult = cartResult + el.price;
           el.count = el.count + 1;
         }
       });
     } else {
       newCard.forEach((el) => {
         if (el.id === id) {
+          cartResult = cartResult - el.price;
           el.count = el.count - 1;
         }
         if (el.count === 0) {
@@ -178,12 +166,15 @@ const Catalog = () => {
         }
       });
     }
+
+    localStorage.setItem("cartResult", JSON.stringify(cartResult));
     localStorage.setItem("cart", JSON.stringify(newCard));
     setFake({});
   };
 
   useEffect(() => {
     dispatch(getCardsThunk());
+    dispatch(getAllThunk());
   }, [dispatch]);
 
   return (
@@ -244,9 +235,7 @@ const Catalog = () => {
                         to={`/card-detail/${card.cardNameTranslate}`}
                       >
                         <img
-                          src={`http://localhost:8000/${
-                            card.photos.split(",")[0]
-                          }`}
+                          src={`http://localhost:8000/${card.photos[0]}`}
                           alt="Photos"
                         />
                       </Link>
@@ -258,7 +247,7 @@ const Catalog = () => {
                       >
                         {card.cardName}
                       </Link>
-                      {card.rating !== 0 && (
+                      {/* {card.rating !== 0 && (
                         <StarRatings
                           className="card__rating"
                           rating={card.rating}
@@ -273,8 +262,7 @@ const Catalog = () => {
                           starDimension="12px"
                           starSpacing="0px"
                         />
-                      )}
-
+                      )} */}
                       <div className="card__prices">
                         {card.priceSale !== 0 && (
                           <div
@@ -311,67 +299,57 @@ const Catalog = () => {
                 <h3>Корзина</h3>
                 {cart ? (
                   cart.map((cart, index) =>
-                    index < 5 ? <div key={cart.id}>{cart.cardName}</div> : ""
+                    index < 5 ? (
+                      <div className="cart__item" key={cart.id}>
+                        <div className="cart__item-left">
+                          <img
+                            width={100}
+                            height={100}
+                            src={`http://localhost:8000/${cart.photos[0]}`}
+                            alt="Photos"
+                          />
+                        </div>
+                        <div className="cart__item-right">
+                          <div className="cart__item-title">
+                            {cart.cardName}
+                          </div>
+                          <div className="cart__item-price">
+                            {cart.count}×{convector(cart.price)}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )
                   )
                 ) : (
                   <p>В корзине нет товаров.</p>
+                )}
+                {cartResult != 0 && <div>Итого: {convector(cartResult)}</div>}
+                {cart.length > 0 && (
+                  <div>
+                    <Link to="/cart">Перейти в корзину</Link>
+                  </div>
                 )}
                 {cart.length > 4 ? <button>Показать все</button> : ""}
               </div>
               <div className="catalog__tags border-custom">
                 <ul className="catalog__tags-list">
-                  <li className="catalog__tags-item">
-                    <label className="tag">
-                      <input
-                        onChange={(e) => {
-                          tagClick(e.target.value, e.target.checked);
-                        }}
-                        name="tagCard"
-                        type="checkbox"
-                        value="Торт"
-                      />
-                      <span>Торт</span>
-                    </label>
-                  </li>
-                  <li className="catalog__tags-item ">
-                    <label className="tag">
-                      <input
-                        onChange={(e) => {
-                          tagClick(e.target.value, e.target.checked);
-                        }}
-                        name="tagCard"
-                        type="checkbox"
-                        value="Кекс"
-                      />
-                      <span>Кекс</span>
-                    </label>
-                  </li>
-                  <li className="catalog__tags-item ">
-                    <label className="tag">
-                      <input
-                        onChange={(e) => {
-                          tagClick(e.target.value, e.target.checked);
-                        }}
-                        name="tagCard"
-                        type="checkbox"
-                        value="Печенье"
-                      />
-                      <span>Печенье</span>
-                    </label>
-                  </li>
-                  <li className="catalog__tags-item ">
-                    <label className="tag">
-                      <input
-                        onChange={(e) => {
-                          tagClick(e.target.value, e.target.checked);
-                        }}
-                        name="tagCard"
-                        type="checkbox"
-                        value="Трубочки"
-                      />
-                      <span>Трубочки</span>
-                    </label>
-                  </li>
+                  {tags.map((tag) => (
+                    <li key={tag.id} className="catalog__tags-item">
+                      <label className="tag">
+                        <input
+                          onChange={(e) => {
+                            tagClick(tag.id, e.target.checked);
+                          }}
+                          name="tagCard"
+                          type="checkbox"
+                          value={tag.tag}
+                        />
+                        <span>{tag.tag}</span>
+                      </label>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
