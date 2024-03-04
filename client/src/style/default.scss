@@ -43,7 +43,7 @@ h3 {
 }
 
 .container {
-  max-width: 1210px;
+  max-width: 1410px;
   padding: 50 20px;
   padding-top: 30px;
   margin: 0 auto;
@@ -418,7 +418,7 @@ h3 {
   }
 
   &__close {
-    background-image: url("/assets/svg/close.svg");
+    background-image: url('/assets/svg/close.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20px;

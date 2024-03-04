@@ -18,121 +18,92 @@
       }
     }
   }
+  &__logo {
+    position: absolute;
+    width: 185px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
   &__inner {
     display: flex;
-
-    .headerMain {
-      display: flex;
-      .header__list {
-        display: flex;
-        justify-content: space-between;
-        .header__item {
-          position: relative;
-          font-size: 28px;
-          line-height: 36px;
-          height: max-content;
-          a {
-            color: black;
-            transition: 0.5s;
-            padding-top: 20px;
-            padding-left: 15px;
-            padding-right: 15px;
-            padding-bottom: 20px;
-          }
-        }
-        .header__item:hover {
-          cursor: pointer;
-          a {
-            transition: 0.5s;
-            color: aquamarine;
-          }
-        }
-        .header__item:hover:after {
-          opacity: 1;
-          transform: scale(1);
-          border-color: #ff91a4;
-        }
-        .header__item::after {
-          content: '';
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900;
-          position: absolute;
-          z-index: 1;
-          left: 0;
-          top: 50%;
-          margin-top: -4px;
-          width: 8px;
-          height: 8px;
-          border: 3px solid;
-          box-sizing: border-box;
-          border-radius: 50%;
-          opacity: 0;
-          transform: scale(0);
-          transition: all 0.3s;
-        }
-        .header__item-left:last-child {
-        }
-        .header__item-right:first-child {
-        }
+    mask-image: url('../../assets/svg/headerBackground.svg');
+    mask-position: bottom;
+    mask-size: cover;
+    mask-repeat: no-repeat;
+  }
+  &__left {
+    display: flex;
+    min-width: 65px;
+    gap: 150px;
+    &__searchButton {
+      color: black;
+      cursor: pointer;
+      margin-left: 10px;
+      padding-left: 10px;
+      font-size: 21px;
+      .search {
+        width: 30px;
       }
     }
-    .header__logo {
-      position: relative;
-      width: 185px;
-      .header__logotip {
-        margin: 0 auto;
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        top: -30px;
-      }
-    }
-    .headerMenu {
-      display: flex;
-      min-width: 65px;
-      &__barList {
-        display: flex;
-
-        margin-left: 10px;
-        &-basket {
-          background-color: #fff;
-          width: 270px;
-          padding: 30px;
-          margin: 0;
-          margin-top: 48px;
-          -webkit-transform: translate3d(0, 60px, 0);
-          -moz-transform: translate3d(0, 60px, 0);
-          -ms-transform: translate3d(0, 60px, 0);
-          transform: translate3d(0, 60px, 0);
-          -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out,
-            -webkit-transform 0.3s ease-in-out, visibility 0.3s step-end;
-          transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
-            visibility 0.3s step-end;
-          visibility: hidden;
-          opacity: 0;
-          box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
-          border-radius: 15px;
-          color: #4b4342;
-        }
-        &-icon {
-          color: black;
-          cursor: pointer;
-          .bag {
-            width: 30px;
-          }
-        }
-      }
-      &__searchButton {
-        color: black;
-        cursor: pointer;
-        margin-left: 10px;
-        padding-left: 10px;
-        font-size: 21px;
-        .search {
-          width: 30px;
-        }
-      }
-    }
+  }
+  &__list {
+    display: flex;
+    display: flex;
+    width: 466px;
+    justify-content: flex-end;
+  }
+  &__item {
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  &__item:hover {
+    color: #5fcac7;
+    transition: all 0.3s;
+  }
+  &__item:hover:after {
+    opacity: 1;
+    transform: scale(1);
+    border-color: #ff91a4;
+    transition: all 0.3s;
+  }
+  &__item:after {
+    content: '';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 50%;
+    margin-top: -4px;
+    width: 8px;
+    height: 8px;
+    border: 3px solid;
+    box-sizing: border-box;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s;
+  }
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 36px;
+  }
+  &__right {
+    display: flex;
   }
 }
 

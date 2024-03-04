@@ -10,62 +10,61 @@ import Deliver from '../../assets/svg/delivery.png';
 const Header = () => {
   return (
     <div className="header">
-      <div className="container">
-        <div className="header__inner">
-          <div className="headerMain">
-            <ul className="header__list header__list-left">
-              <li className="header__item header__item-left">
-                <a className="header__linkLeft" to="/catalog">
-                  Главная
-                </a>
-              </li>
-              <li className="header__item header__item-left">
-                <a className="header__linkLeft" to="/catalog">
-                  Страницы
-                </a>
-              </li>
-              <li className="header__item header__item-left">
-                <a className="header__linkLeft" to="/catalog">
-                  Портфолио
-                </a>
-              </li>
-            </ul>
-            <div className="header__logo">
-              <div className="header__logo-wrapper">
-                <img src={logo} alt="Logo" className="header__logotip" />
-              </div>
+      <div className="header__logo">
+        <div className="header__logo-wrapper">
+          <img src={logo} alt="Logo" className="header__logotip" />
+        </div>
+      </div>
+      <div className="header__inner">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+              <ul className="header__list">
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Главная
+                  </a>
+                </li>
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Страницы
+                  </a>
+                </li>
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Портфолио
+                  </a>
+                </li>
+              </ul>
+              <ul className="header__list ">
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Блог
+                  </a>
+                </li>
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Магазин
+                  </a>
+                </li>
+                <li className="header__item">
+                  <a className="header__link" to="/catalog">
+                    Контакты
+                  </a>
+                </li>
+              </ul>
             </div>
-            <ul className="header__list header__list-right">
-              <li className="header__item header__item-right">
-                <a className="header__linkRight" to="/catalog">
-                  Блог
+            <div class="header__right">
+              <div class="header__barList">
+                <a class="headerMenu__barList-icon" title="View your shopping cart">
+                  {/* <img className="bag" src={bag} /> */}
+                  <Svg name={'bag'} width={50} height={40} stroke={'black'} fill={'none'} />
                 </a>
-              </li>
-              <li className="header__item header__item-right">
-                <a className="header__linkRight" to="/catalog">
-                  Магазин
-                </a>
-              </li>
-              <li className="header__item header__item-right">
-                <a className="header__linkRight" to="/catalog">
-                  Контакты
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="headerMenu">
-            <div class="headerMenu__barList">
-              <div class="headerMenu__barList-basket">
-                <div class="basket__wrapper">
-                  <p class="basket__wrapper-message">No products in the cart.</p>
-                </div>
               </div>
-              <a class="headerMenu__barList-icon" title="View your shopping cart">
-                <img className="bag" src={bag} />
-              </a>
-            </div>
-            <div class="headerMenu__searchButton">
-              <img className="search" src={search} />
+              <div class="headerMenu__searchButton">
+                {/* <img className="search" src={search} /> */}
+                <Svg name={'search'} width={50} height={40} fill={'black'} />
+              </div>
             </div>
           </div>
         </div>
