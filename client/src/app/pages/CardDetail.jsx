@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { convector, useAppSelector } from "../../redux/hooks";
 import { getAllThunk, getCardThunk } from "../../redux/cards/cardsSlice";
 import MainBanner from "../components/MainBanner";
@@ -86,6 +86,26 @@ const CardDetail = () => {
     setFake({});
   };
 
+  const deleteItemCart = (cartItem) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let newCart = [];
+    let cartResult = 0;
+
+    if (cart.length > 0) {
+      cart.forEach((el) => {
+        if (el.id !== cartItem.id) {
+          newCart.push(el);
+          cartResult = cartResult + el.count * el.price;
+        }
+      });
+    }
+
+    localStorage.setItem("cartResult", JSON.stringify(cartResult));
+    localStorage.setItem("cart", JSON.stringify(newCart));
+
+    setFake({});
+  };
+
   useEffect(() => {
     dispatch(getCardThunk(cardNameTranslate));
     dispatch(getAllThunk());
@@ -163,18 +183,18 @@ const CardDetail = () => {
                       <div className="card-detail__info-btn card-detail__info-btn--cart">
                         <button
                           className="card-detail__info-btn-change"
-                          onClick={() => onChangeCount("add", card.id)}
-                        >
-                          {" "}
-                          +
-                        </button>
-                        {counter}
-                        <button
-                          className="card-detail__info-btn-change"
                           onClick={() => onChangeCount("remove", card.id)}
                         >
                           {" "}
                           -
+                        </button>
+                        {counter}
+                        <button
+                          className="card-detail__info-btn-change"
+                          onClick={() => onChangeCount("add", card.id)}
+                        >
+                          {" "}
+                          +
                         </button>
                       </div>
                       <button
@@ -207,43 +227,65 @@ const CardDetail = () => {
                 <div className="card-detail__bottom-title">
                   <span>Описание</span>
                 </div>
-                <div className="card-detail__description">
+                <div className="card-detail__bottom-description">
                   {card.description}
                 </div>
               </div>
             </div>
-            <div className="catalog__cart border-custom mb-30">
-              <h3>Корзина</h3>
-              {cart ? (
-                cart.map((cart, index) =>
-                  index < 5 ? (
-                    <div className="cart__item" key={cart.id}>
-                      <div className="cart__item-left">
-                        <img
-                          width={100}
-                          height={100}
-                          src={`http://localhost:8000/${cart.photos[0]}`}
-                          alt="Photos"
-                        />
-                      </div>
-                      <div className="cart__item-right">
-                        <div className="cart__item-title">{cart.cardName}</div>
-                        <div className="cart__item-price">
-                          {cart.count}×{convector(cart.price)}
+            <div className="catalog__cart cart border-custom mb-30">
+              <h3 className="cart__title">Корзина</h3>
+              <div className="cart__list">
+                {cart.length > 0 ? (
+                  cart.map((cart, index) =>
+                    index < 5 ? (
+                      <div className="cart__item" key={cart.id}>
+                        <div className="cart__item-case">
+                          <div className="cart__item-left">
+                            <img
+                              width={100}
+                              height={100}
+                              src={`http://localhost:8000/${cart.photos[0]}`}
+                              alt="Photos"
+                            />
+                          </div>
+                          <div className="cart__item-right">
+                            <div className="cart__item-title">
+                              <Link
+                                className="cart__item-title"
+                                to={`/card-detail/${cart.cardNameTranslate}`}
+                              >
+                                {cart.cardName}
+                              </Link>
+                            </div>
+                            <div className="cart__item-price">
+                              {cart.count}×{convector(cart.price)}
+                            </div>
+                          </div>
                         </div>
+
+                        <div
+                          className="cart__item-delete"
+                          onClick={() => deleteItemCart(cart)}
+                        ></div>
                       </div>
-                    </div>
-                  ) : (
-                    ""
+                    ) : (
+                      ""
+                    )
                   )
-                )
-              ) : (
-                <p>В корзине нет товаров.</p>
+                ) : (
+                  <p>В корзине нет товаров.</p>
+                )}
+              </div>
+              {cartResult !== 0 && (
+                <div className="cart__result">
+                  <span>Итого:</span> {convector(cartResult)}
+                </div>
               )}
-              {cartResult != 0 && <div>Итого: {convector(cartResult)}</div>}
               {cart.length > 0 && (
-                <div>
-                  <Link to="/cart">Перейти в корзину</Link>
+                <div className="cart__btn">
+                  <Link to="/cart" className=" btn btn--brown">
+                    Перейти в корзину
+                  </Link>
                 </div>
               )}
               {cart.length > 4 ? <button>Показать все</button> : ""}

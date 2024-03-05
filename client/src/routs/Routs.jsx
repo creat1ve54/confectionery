@@ -1,3 +1,4 @@
+import About from "../app/pages/About";
 import Admin from "../app/pages/Admin";
 import AdminProduct from "../app/pages/AdminProduct";
 import AdminProductCard from "../app/pages/AdminProductCard";
@@ -31,6 +32,10 @@ export const publishRoutes = [
   {
     path: "/card-detail/:cardNameTranslate",
     Component: CardDetail,
+  },
+  {
+    path: "/about",
+    Component: About,
   },
 ];
 

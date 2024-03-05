@@ -148,7 +148,6 @@ export const cardsSlice = createSlice({
         localStorage.setItem("cart", JSON.stringify([]));
         localStorage.setItem("cartResult", JSON.stringify(0));
       }
-      
     });
     builder.addCase(getCardThunk.pending, (state, action) => {
       state.isLoading = true;
@@ -181,8 +180,35 @@ export const cardsSlice = createSlice({
     });
     builder.addCase(editCardThunk.fulfilled, (state, action) => {
       state.status = action.payload.message;
-      state.cards = action.payload.cards;
+      // state.cards = action.payload.cards;
       state.isLoading = false;
+
+      let cart = JSON.parse(localStorage.getItem("cart")!) || [];
+      let cartResult = JSON.parse(localStorage.getItem("cartResult")!) || 0;
+      let newCart: {
+        price: any;
+        count: any;
+        id: any;
+      }[] = [];
+
+      cart.forEach((el: { id: any; count: any; price: any }) => {
+        if (el.id === action.payload.card.id) {
+          action.payload.card.cart = true;
+          action.payload.card.count = el.count;
+          newCart.push(action.payload.card);
+        } else {
+          newCart.push(el);
+        }
+      });
+
+      if (newCart.length > 0) {
+        newCart.forEach((el) => {
+          cartResult = cartResult + el.count * el.price;
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      localStorage.setItem("cartResult", JSON.stringify(cartResult));
     });
 
     builder.addCase(createTagsThunk.pending, (state, action) => {

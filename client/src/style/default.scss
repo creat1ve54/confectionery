@@ -16,6 +16,20 @@ h1 {
   font-weight: 700;
 }
 
+h2 {
+  font-size: 48px;
+  font-weight: 500;
+
+  @media screen and (max-width: $mobile) {
+    font-size: 36px;
+  }
+}
+
+.h2 {
+  font-size: 48px;
+  font-weight: 500;
+}
+
 h3 {
   font-family: $fontFamily, $fontDefault;
   font-size: 28px;
@@ -44,7 +58,7 @@ h3 {
 
 .container {
   max-width: 1210px;
-  padding: 50 20px;
+  padding: 50px 20px;
   padding-top: 30px;
   margin: 0 auto;
 }
@@ -70,7 +84,7 @@ h3 {
   transition: all 0.5s ease-in-out;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 1;
     top: 0;
@@ -87,7 +101,7 @@ h3 {
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 1;
     top: 0;
@@ -114,7 +128,7 @@ h3 {
     border-color: inherit;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       z-index: 1;
       left: 50%;
@@ -183,6 +197,37 @@ h3 {
   }
 }
 
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-style: solid;
+  border-width: 3px;
+  line-height: 1.066667em;
+  color: inherit;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 16px;
+  border-color: #4b4342;
+  transition: all 0.3s ease-in-out;
+  &--brown {
+    background-color: #4b4342;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: #4b4342;
+      background-color: #ffffff;
+      color: #4b4342;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
 .input {
   display: inline-block;
   font-family: $fontFamily, $fontDefault;
@@ -204,8 +249,8 @@ h3 {
   border-radius: 20px;
 
   &::before {
-    content: '';
-    background-image: url('../assets/svg/border-custom__decor.jpg');
+    content: "";
+    background-image: url("../assets/svg/border-custom__decor.jpg");
     width: 87px;
     height: 36px;
     display: inline-block;
@@ -227,7 +272,7 @@ h3 {
     color: #ffffff;
     &:not(:first-child) {
       &::before {
-        content: '/';
+        content: "/";
         margin: 0px 5px;
       }
     }
@@ -237,8 +282,8 @@ h3 {
 .main-banner {
   margin-bottom: 80px;
   height: 340px;
-  background-image: url('../assets/images/main-banner-bg.jpg');
-  mask-image: url('../assets/images/skeleton-banner.svg');
+  background-image: url("../assets/images/main-banner-bg.jpg");
+  mask-image: url("../assets/images/skeleton-banner.svg");
   mask-position: bottom;
   mask-size: cover;
   mask-repeat: no-repeat;
@@ -254,29 +299,36 @@ h3 {
   &__title {
     color: #ffffff;
   }
+
+  @media screen and (max-width: $mobile) {
+    margin-bottom: 30px;
+  }
 }
 
 .card {
   border: none;
   display: flex;
   flex-direction: column;
+  max-width: 270px;
   &__img {
     position: relative;
     margin-bottom: 20px;
     border-radius: 20px;
     overflow: hidden;
-    width: 270px;
-    height: 270px;
+    max-width: 270px;
+    // height: 270px;
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      // object-fit: cover;
+      object-fit: contain;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         .card__btn {
           opacity: 1;
+          visibility: visible;
         }
       }
     }
@@ -284,18 +336,21 @@ h3 {
 
   &__btn {
     opacity: 0;
+    visibility: hidden;
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     transition: all 0.3s ease-in-out;
-    background-color: $white;
+    // background-color: $white;
     border-radius: 20px;
     outline: none;
     border: none;
     white-space: nowrap;
     padding: 10px;
     font-size: 16px;
+    background-color: $aquamarine;
+    color: #ffffff;
     transition: all 0.3s ease-in-out;
 
     &--cart {
@@ -306,6 +361,7 @@ h3 {
       padding: 0;
       overflow: hidden;
       opacity: 1;
+      visibility: visible;
       background-color: $darkGray;
       color: $white;
       button {
@@ -372,6 +428,9 @@ h3 {
 
   &__sale {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2;
     top: 5px;
     left: 5px;
@@ -379,9 +438,24 @@ h3 {
     height: 70px;
     border-radius: 50%;
     text-align: center;
-    line-height: 70px;
+    // line-height: 70px;
     color: #fff;
     background-color: #ff91a4;
+  }
+
+  @media screen and (max-width: $mobile) {
+    &__sale {
+      width: 50px;
+      height: 50px;
+      font-size: 14px;
+    }
+
+    &__btn {
+      opacity: 1;
+      visibility: visible;
+      bottom: 10px;
+      font-size: 14px;
+    }
   }
 }
 
@@ -455,6 +529,12 @@ h3 {
       background-color: inherit;
     }
   }
+
+  @media screen and (max-width: $mobile) {
+    .dropdown-toggle {
+      width: 150px;
+    }
+  }
 }
 
 .tag {
@@ -483,6 +563,97 @@ h3 {
   input:checked {
     & + span {
       background-color: $aquamarine;
+    }
+  }
+}
+
+.cart {
+  &__title {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #4b4342;
+  }
+
+  &__item {
+    // position: relative;
+    display: flex;
+    column-gap: 15px;
+    justify-content: space-between;
+
+    &-case {
+      display: flex;
+      column-gap: 15px;
+    }
+
+    &-delete {
+      margin-left: 0;
+      cursor: pointer;
+      top: 0px;
+      right: 10px;
+      background-image: url("/assets/svg/close.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px;
+      width: 20px;
+      height: 20px;
+      background-color: inherit;
+      border: none;
+    }
+
+    &-title {
+      font-weight: 500;
+      color: #4b4342;
+      font-size: 18px;
+      transition: all 0.3s ease-in-out;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: $aquamarine;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+
+    &-price {
+      margin-top: 8px;
+      font-size: 18px;
+      color: $aquamarine;
+    }
+
+    &-left {
+      img {
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  &__result {
+    font-size: 18px;
+    margin-bottom: 10px;
+    background: #f8f8f8;
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 30px;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &__btn {
+    .btn {
+      width: 100%;
+      font-size: 18px;
     }
   }
 }

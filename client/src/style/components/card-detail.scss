@@ -2,9 +2,11 @@
   .catalog__cart {
     position: sticky;
     top: 0px;
-    max-width: 270px;
-    flex: 1 1 auto;
+    // max-width: 270px;
+    // flex: 1 1 auto;
+    flex: 0 0 270px;
   }
+
 
   &__container {
     display: flex;
@@ -73,6 +75,32 @@
       &-text {
         color: #ff91a4;
       }
+    }
+  }
+
+  &__bottom {
+    margin-top: 20px;
+    border-bottom: 1px solid #d8e8ec;
+
+    &-title {
+      border-bottom: 4px solid #edecec;
+      span {
+        display: inline-block;
+        text-decoration: none;
+        min-width: 112px;
+        padding: 13px 20px;
+        font-weight: 500;
+        font-size: 20px;
+        color: #1c3545;
+        margin-bottom: -4px;
+        border-bottom: 4px solid #ff91a4;
+      }
+    }
+
+    &-description {
+      padding: 35px 20px;
+      line-height: 29px;
+      font-size: 18px;
     }
   }
 }

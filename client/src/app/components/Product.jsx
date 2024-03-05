@@ -273,7 +273,7 @@ const Product = ({ card, tagsArray }) => {
             active={activeTag}
             items={tags}
             itemsKey={"tag"}
-            inputPlaceholder={"Найти или добавить тег"}
+            inputPlaceholder={"Добавить тег"}
             inputValue={tag}
             setInputValue={setTag}
             setActive={setActiveTag}

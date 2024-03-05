@@ -77,3 +77,9 @@ export const tagsAPI = {
     return instance.get(`/tags/${id}`);
   },
 };
+
+export const cartAPI = {
+  send(cart) {
+    return instance.post("/cart/send", cart);
+  },
+};

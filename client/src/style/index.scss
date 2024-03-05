@@ -10,6 +10,7 @@
 @import "./components/adminProduct.scss";
 @import "./components/catalog.scss";
 @import "./components/card-detail.scss";
+@import "./components/about.scss";
 
 .swiper {
   width: 100%;
@@ -71,5 +72,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  // object-fit: cover;
+  object-fit: contain;
 }
+

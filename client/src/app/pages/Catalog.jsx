@@ -150,7 +150,7 @@ const Catalog = () => {
     if (change === "add") {
       newCard.forEach((el) => {
         if (el.id === id) {
-          cartResult = cartResult + el.price;
+          cartResult = Number(cartResult) + Number(el.price);
           el.count = el.count + 1;
         }
       });
@@ -169,6 +169,26 @@ const Catalog = () => {
 
     localStorage.setItem("cartResult", JSON.stringify(cartResult));
     localStorage.setItem("cart", JSON.stringify(newCard));
+    setFake({});
+  };
+
+  const deleteItemCart = (cartItem) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let newCart = [];
+    let cartResult = 0;
+
+    if (cart.length > 0) {
+      cart.forEach((el) => {
+        if (el.id !== cartItem.id) {
+          newCart.push(el);
+          cartResult = cartResult + el.count * el.price;
+        }
+      });
+    }
+
+    localStorage.setItem("cartResult", JSON.stringify(cartResult));
+    localStorage.setItem("cart", JSON.stringify(newCart));
+
     setFake({});
   };
 
@@ -203,17 +223,17 @@ const Catalog = () => {
                         <div>
                           <div className="card__btn card__btn--cart">
                             <button
-                              onClick={() => onChangeCount("add", card.id)}
-                            >
-                              {" "}
-                              +
-                            </button>
-                            {card.count}
-                            <button
                               onClick={() => onChangeCount("remove", card.id)}
                             >
                               {" "}
                               -
+                            </button>
+                            {card.count}
+                            <button
+                              onClick={() => onChangeCount("add", card.id)}
+                            >
+                              {" "}
+                              +
                             </button>
                           </div>
                         </div>
@@ -288,47 +308,66 @@ const Catalog = () => {
               />
             </div>
             <div className="catalog__right">
-              <Input
-                value={search}
-                setValue={setSearch}
-                placeholder="Поиск"
-                type="input"
-                onChange={searchCard}
-              />
-              <div className="catalog__cart border-custom mb-30">
-                <h3>Корзина</h3>
-                {cart ? (
-                  cart.map((cart, index) =>
-                    index < 5 ? (
-                      <div className="cart__item" key={cart.id}>
-                        <div className="cart__item-left">
-                          <img
-                            width={100}
-                            height={100}
-                            src={`http://localhost:8000/${cart.photos[0]}`}
-                            alt="Photos"
-                          />
-                        </div>
-                        <div className="cart__item-right">
-                          <div className="cart__item-title">
-                            {cart.cardName}
+              <div className="catalog__search">
+                <Input
+                  value={search}
+                  setValue={setSearch}
+                  placeholder="Поиск"
+                  type="input"
+                  onChange={searchCard}
+                />
+              </div>
+              <div className="catalog__cart cart border-custom mb-30">
+                <h3 className="cart__title">Корзина</h3>
+                <div className="cart__list">
+                  {cart.length > 0 ? (
+                    cart.map((cart, index) =>
+                      index < 5 ? (
+                        <div className="cart__item" key={cart.id}>
+                          <div className="cart__item-case">
+                            <div className="cart__item-left">
+                              <img
+                                width={100}
+                                height={100}
+                                src={`http://localhost:8000/${cart.photos[0]}`}
+                                alt="Photos"
+                              />
+                            </div>
+                            <div className="cart__item-right">
+                              <Link
+                                className="cart__item-title"
+                                to={`/card-detail/${cart.cardNameTranslate}`}
+                              >
+                                {cart.cardName}
+                              </Link>
+                              <div className="cart__item-price">
+                                {cart.count}×{convector(cart.price)}
+                              </div>
+                            </div>
                           </div>
-                          <div className="cart__item-price">
-                            {cart.count}×{convector(cart.price)}
-                          </div>
+                          <div
+                            className="cart__item-delete"
+                            onClick={() => deleteItemCart(cart)}
+                          ></div>
                         </div>
-                      </div>
-                    ) : (
-                      ""
+                      ) : (
+                        ""
+                      )
                     )
-                  )
-                ) : (
-                  <p>В корзине нет товаров.</p>
+                  ) : (
+                    <p>В корзине нет товаров.</p>
+                  )}
+                </div>
+                {cartResult !== 0 && (
+                  <div className="cart__result">
+                    <span>Итого:</span> {convector(cartResult)}
+                  </div>
                 )}
-                {cartResult != 0 && <div>Итого: {convector(cartResult)}</div>}
                 {cart.length > 0 && (
-                  <div>
-                    <Link to="/cart">Перейти в корзину</Link>
+                  <div className="cart__btn">
+                    <Link to="/cart" className="btn btn--brown">
+                      Перейти в корзину
+                    </Link>
                   </div>
                 )}
                 {cart.length > 4 ? <button>Показать все</button> : ""}
