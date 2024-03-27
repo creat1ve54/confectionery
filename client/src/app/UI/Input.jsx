@@ -21,7 +21,7 @@ const Input = ({
       };
       document.querySelectorAll(`.${maskClass}`).forEach((item) => {
         if (item) {
-          const mask = IMask(item, maskOpt);
+          IMask(item, maskOpt);
         }
       });
     }
@@ -33,7 +33,7 @@ const Input = ({
         <textarea
           className="input"
           placeholder={placeholder}
-          onChange={(e) => {
+          onInput={(e) => {
             setValue(e.target.value);
           }}
           value={value}
@@ -46,7 +46,7 @@ const Input = ({
           className={maskClass ? "input " + maskClass : "input"}
           {...valid}
           placeholder={placeholder}
-          onChange={onChange}
+          onInput={onChange}
           onKeyDown={onKeyDown}
           value={value == 0 ? "" : value}
         />
@@ -56,7 +56,7 @@ const Input = ({
           className={maskClass ? "input " + maskClass : "input"}
           {...valid}
           placeholder={placeholder}
-          onChange={(e) => {
+          onInput={(e) => {
             setValue(e.target.value);
           }}
           onKeyDown={onKeyDown}

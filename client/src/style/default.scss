@@ -2,6 +2,11 @@ body {
   font-family: $fontFamily, $fontDefault !important;
 }
 
+
+.body--active {
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -184,16 +189,107 @@ h3 {
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: red;
-      background-color: black;
-      border-color: black;
+      color: #ffffff;
+      background-color: $aquamarine;
+      border-color: $aquamarine;
       span {
         &::before {
-          background-color: black;
-          border-color: black;
+          background-color: $aquamarine;
+          border-color: $aquamarine;
         }
       }
     }
+  }
+}
+
+.burger {
+  width: 30px;
+  height: 20px;
+  background-color: inherit;
+  border: none;
+  position: absolute;
+  padding: 0;
+
+  &--active {
+    .burger {
+      &__container {
+        span {
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease-in-out;
+        }
+
+        &::after {
+          transform: rotate(-45deg);
+          top: 10px;
+          transition: all 0.3s ease-in-out;
+        }
+
+        &::before {
+          transform: rotate(45deg);
+          top: 10px;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+
+  &__container {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    span {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #212529;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      background-color: #212529;
+      top: 0;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      background-color: #212529;
+      top: 100%;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  overflow: hidden;
+  height: 0;
+  width: 100vw;
+  background-color: #ffffff;
+  top: 86px;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+
+  &--active {
+    height: calc(100dvh - 86px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__container {
+    padding: 40px;
   }
 }
 
@@ -280,6 +376,7 @@ h3 {
 }
 
 .main-banner {
+  margin-top: -20px;
   margin-bottom: 80px;
   height: 340px;
   background-image: url("../assets/images/main-banner-bg.jpg");
@@ -338,7 +435,7 @@ h3 {
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
     transition: all 0.3s ease-in-out;
@@ -431,7 +528,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    // z-index: 2;
     top: 5px;
     left: 5px;
     width: 70px;

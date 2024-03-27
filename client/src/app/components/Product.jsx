@@ -48,6 +48,7 @@ const Product = ({ card, tagsArray }) => {
     if (activeTag.length == 1) {
       setActiveTag({ id: activeTag[0].id, tag: activeTag[0].tag });
     }
+
     setTags(tagsArray);
 
     if (card && card.id != 0) {
@@ -100,7 +101,6 @@ const Product = ({ card, tagsArray }) => {
   const sendForm = () => {
     try {
       if (activeTag.id !== 0) {
-        debugger
         const data = new FormData();
         data.append("cardName", cardName);
         data.append("price", price);
@@ -117,6 +117,7 @@ const Product = ({ card, tagsArray }) => {
         }
 
         dispatch(createCardThunk(data));
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -190,10 +191,7 @@ const Product = ({ card, tagsArray }) => {
       </div>
       <div className="admin-product__main-add-card">
         {card && (
-          <img
-            src={`http://localhost:8000/${oldPhotos[0]}`}
-            alt="oldPhotos"
-          />
+          <img src={`http://localhost:8000/${oldPhotos[0]}`} alt="oldPhotos" />
         )}
         <div className="admin-product__main-add-card-title">
           {/* Название товара */}

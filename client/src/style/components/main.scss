@@ -1,0 +1,233 @@
+.main {
+  &__banner {
+    position: relative;
+    // z-index: 1;
+    margin-top: -30px;
+    // mask-image: url("/assets/images/skeleton-banner.svg");
+    // mask-position: bottom;
+    // mask-size: cover;
+    // mask-repeat: no-repeat;
+
+    &-container {
+      position: relative;
+      background-image: url("/assets/images/main-banner.jpg");
+      //   background-size: cover;
+      background-size: 170%;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 614px;
+      opacity: 0;
+      animation: opacityImg 3s forwards;
+    }
+
+    &-img {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 472px;
+      height: 472px;
+      background-image: url("/assets/images/main-banner-welcom.png");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      opacity: 0;
+      animation: opacityInfo 2s forwards 1s;
+    }
+
+    &-case {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 288px;
+      height: 100%;
+
+      svg {
+        margin-bottom: 20px;
+      }
+    }
+
+    &-title {
+      text-align: center;
+    }
+
+    &-text {
+      text-align: center;
+    }
+  }
+
+  &__about {
+    position: relative;
+    background-image: url("/assets/images/story-bg-two.jpg");
+    margin-top: -78px;
+    z-index: 0;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &__mission {
+    position: relative;
+    z-index: 1;
+    margin-top: -52px;
+    .about__mission {
+      &-case {
+        &::before {
+          background-color: rgba($aquamarine, 0.8);
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $laptop) {
+    &__about {
+      .about__story {
+        &-item {
+          &-title {
+            font-size: 22px;
+          }
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $table) {
+    &__about {
+      height: 1000px;
+      .about__story {
+        &-list {
+          // flex-direction: column;
+          flex-wrap: wrap;
+        }
+        &-item {
+          flex: 1 1 48%;
+          &-title {
+            font-size: 22px;
+          }
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    &__banner {
+      &-img {
+        width: 300px;
+        height: 300px;
+        opacity: 1;
+        animation: none;
+      }
+
+      &-container {
+        opacity: 1;
+        background-size: cover;
+        animation: none;
+      }
+
+      &-case {
+        width: 220px;
+      }
+
+      &-title {
+        font-size: 24px;
+      }
+
+      &-text {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobile) {
+    &__banner {
+      &-title {
+        font-size: 24px;
+      }
+
+      &-text {
+        font-size: 16px;
+      }
+    }
+
+    &__about {
+      padding-top: 70px;
+      padding-bottom: 50px;
+      height: auto;
+      .about__story {
+        &-list {
+          // flex-direction: column;
+          flex-wrap: wrap;
+        }
+        &-item {
+          flex: 1 1 48%;
+          &-title {
+            font-size: 22px;
+          }
+
+          &-img {
+            svg {
+              width: 100px;
+              height: 100px;
+            }
+
+            img {
+              width: 70px;
+              height: 70px;
+            }
+          }
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes opacityImg {
+  0% {
+    opacity: 0;
+    background-size: 170%;
+    background-position: center;
+  }
+  80% {
+    opacity: 1;
+    background-size: 100%;
+    background-position: center;
+  }
+  100% {
+    opacity: 1;
+    background-size: cover;
+  }
+}
+
+@keyframes opacityInfo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

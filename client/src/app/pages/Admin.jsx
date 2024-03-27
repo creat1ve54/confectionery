@@ -28,9 +28,9 @@ const Admin = React.forwardRef((props, ref) => {
   }, [isAuth]);
 
   const sendForm = () => {
-    const admin = new FormData()
-    admin.append('userName', userName)
-    admin.append('password', password)
+    const admin = new FormData();
+    admin.append("userName", userName);
+    admin.append("password", password);
     dispatch(loginAdminThunk(admin));
     navigate("/admin");
   };
@@ -54,12 +54,10 @@ const Admin = React.forwardRef((props, ref) => {
                 }),
               }}
             />
-            {errors.userName?.type === "required" && (
-              <div style={{ color: "red", marginTop: "-15px" }}>
-                Поле Логин не должно быть пустое
-              </div>
-            )}
-            {errors.userName?.type === "maxLength" && (
+            {/* {errors.userName?.type === "required" && (
+              <div style={{ color: "red", marginTop: "-15px" }}>Поле</div>
+            )} */}
+            {/* {errors.userName?.type === "maxLength" && (
               <div style={{ color: "red", marginTop: "-15px" }}>
                 Поле Логин не должно быть больше 20 символов
               </div>
@@ -68,26 +66,30 @@ const Admin = React.forwardRef((props, ref) => {
               <div style={{ color: "red", marginTop: "-15px" }}>
                 Поле Логин не должно быть меньше 4 символов
               </div>
-            )}
+            )} */}
             <Input
               valid={{
                 ...register("password", { required: true, minLength: 4 }),
               }}
+              type={'password'}
               ref={ref}
               value={password}
               setValue={setPassword}
               placeholder="Пароль"
             />
-            {errors.password?.type === "required" && (
+            {errors.password?.type === "required" ||
+            errors.userName?.type === "required" ? (
               <div style={{ color: "red", marginTop: "-15px" }}>
-                Поле Пароль не должно быть пустое
+                Не верный логин или пароль
               </div>
+            ) : (
+              ""
             )}
-            {errors.password?.type === "minLength" && (
+            {/* {errors.password?.type === "minLength" && (
               <div style={{ color: "red", marginTop: "-15px" }}>
                 Поле Пароль не должно быть меньше 4 символов
               </div>
-            )}
+            )} */}
             <Button
               onClick={handleSubmit(sendForm)}
               type="submit"

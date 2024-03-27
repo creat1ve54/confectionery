@@ -1,0 +1,43 @@
+.contact {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    &-text {
+      color: #4b4342;
+      transition: all 0.3s ease-in-out;
+    }
+
+    a {
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: $aquamarine;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: $table) {
+    &__list {
+      flex-direction: column;
+    }
+  }
+}

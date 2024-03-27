@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -81,7 +81,8 @@ const AdminProduct = () => {
     <div className="admin-product">
       <div className="container">
         <div className="admin-product__header">
-          <div className="admin-product__header-item">Товары</div>
+          <NavLink to={'/'} className="admin-product__header-item">Главная</NavLink>
+          {/* <div className="admin-product__header-item">Товары</div> */}
         </div>
         <div className="admin-product__main">
           <div className="admin-product__main-left ">

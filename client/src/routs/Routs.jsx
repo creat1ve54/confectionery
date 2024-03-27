@@ -5,6 +5,7 @@ import AdminProductCard from "../app/pages/AdminProductCard";
 import CardDetail from "../app/pages/CardDetail";
 import Cart from "../app/pages/Cart";
 import Catalog from "../app/pages/Catalog";
+import Contact from "../app/pages/Contact";
 import Error from "../app/pages/Error";
 import Main from "../app/pages/Main";
 
@@ -36,6 +37,10 @@ export const publishRoutes = [
   {
     path: "/about",
     Component: About,
+  },
+  {
+    path: "/contact",
+    Component: Contact,
   },
 ];
 

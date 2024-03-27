@@ -12,6 +12,8 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const CardDetail = () => {
   const params = useParams();
@@ -111,189 +113,217 @@ const CardDetail = () => {
     dispatch(getAllThunk());
   }, [dispatch, cardNameTranslate]);
   return (
-    <section>
-      <MainBanner
-        name={card.cardName}
-        links={[{ href: "/catalog", name: "Каталог" }]}
-      />
-      <div className="card-detail">
-        <div className="container">
-          <div className="card-detail__container">
-            <div className="card-detail__case">
-              <div className="card-detail__info">
-                <div className="card-detail__info-left">
-                  <Swiper
-                    spaceBetween={10}
-                    thumbs={{ swiper: thumbsSwiper }}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper2"
-                  >
-                    {card.photos &&
-                      card.photos.map((photo, index) => (
-                        <SwiperSlide key={index}>
-                          <img
-                            src={`http://localhost:8000/${photo}`}
-                            width={200}
-                            height={200}
-                            alt="Photos"
-                          />
-                        </SwiperSlide>
-                      ))}
-                  </Swiper>
-                  <Swiper
-                    onSwiper={setThumbsSwiper}
-                    spaceBetween={10}
-                    slidesPerView={4}
-                    freeMode={true}
-                    watchSlidesProgress={true}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper"
-                  >
-                    {card.photos &&
-                      card.photos.map((photo, index) => (
-                        <SwiperSlide key={index}>
-                          <img
-                            src={`http://localhost:8000/${photo}`}
-                            width={200}
-                            height={200}
-                            alt="Photos"
-                          />
-                        </SwiperSlide>
-                      ))}
-                  </Swiper>
-                </div>
-                <div className="card-detail__info-right">
-                  <div className="card-detail__info-right-up">
-                    <div className="card-detail__info-title">
-                      {card.cardName}
-                    </div>
-                    <div className="card-detail__info-prices">
-                      {card.priceSale !== 0 && (
-                        <div className="card-detail__info-price card-detail__info-price--old">
-                          {convector(card.priceSale)}
-                        </div>
-                      )}
-                      <div className="card-detail__info-price">
-                        {convector(card.price)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-detail__info-right-bottom">
-                    <div className="card-detail__info-counter">
-                      <div className="card-detail__info-btn card-detail__info-btn--cart">
-                        <button
-                          className="card-detail__info-btn-change"
-                          onClick={() => onChangeCount("remove", card.id)}
+    <>
+      <Header />
+      <section>
+        <MainBanner
+          name={card.cardName}
+          links={[{ href: "/catalog", name: "Каталог" }]}
+        />
+        <div className="card-detail">
+          <div className="container">
+            <div className="card-detail__container">
+              <div className="card-detail__case">
+                <div className="card-detail__info">
+                  <div className="card-detail__info-left">
+                    {card.photos.length > 1 ? (
+                      <>
+                        <Swiper
+                          spaceBetween={10}
+                          thumbs={{ swiper: thumbsSwiper }}
+                          modules={[FreeMode, Navigation, Thumbs]}
+                          className="mySwiper2"
                         >
-                          {" "}
-                          -
-                        </button>
-                        {counter}
-                        <button
-                          className="card-detail__info-btn-change"
-                          onClick={() => onChangeCount("add", card.id)}
+                          {card.photos &&
+                            card.photos.map((photo, index) => (
+                              <SwiperSlide key={index}>
+                                <img
+                                  src={`http://localhost:8000/${photo}`}
+                                  width={200}
+                                  height={200}
+                                  alt="Photos"
+                                />
+                              </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <Swiper
+                          onSwiper={setThumbsSwiper}
+                          spaceBetween={10}
+                          slidesPerView={4}
+                          freeMode={true}
+                          watchSlidesProgress={true}
+                          modules={[FreeMode, Navigation, Thumbs]}
+                          className="mySwiper"
                         >
-                          {" "}
-                          +
-                        </button>
-                      </div>
-                      <button
-                        className="card-detail__info-btn-add"
-                        onClick={() => addCart(card)}
-                      >
-                        Добавить в корзину
-                      </button>
-                    </div>
-                    <ul className="card-detail__info-list">
-                      <li className="card-detail__info-item">
-                        <div className="card-detail__info-item-title">
-                          Категория:
-                        </div>
-                        <div className="card-detail__info-item-text">
-                          {card.category}
-                        </div>
-                      </li>
-                      <li className="card-detail__info-item">
-                        <div className="card-detail__info-item-title">Тег:</div>
-                        <div className="card-detail__info-item-text">
-                          {tags.map((tag) => tag.id === card.tagId && tag.tag)}
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="card-detail__bottom">
-                <div className="card-detail__bottom-title">
-                  <span>Описание</span>
-                </div>
-                <div className="card-detail__bottom-description">
-                  {card.description}
-                </div>
-              </div>
-            </div>
-            <div className="catalog__cart cart border-custom mb-30">
-              <h3 className="cart__title">Корзина</h3>
-              <div className="cart__list">
-                {cart.length > 0 ? (
-                  cart.map((cart, index) =>
-                    index < 5 ? (
-                      <div className="cart__item" key={cart.id}>
-                        <div className="cart__item-case">
-                          <div className="cart__item-left">
-                            <img
-                              width={100}
-                              height={100}
-                              src={`http://localhost:8000/${cart.photos[0]}`}
-                              alt="Photos"
-                            />
-                          </div>
-                          <div className="cart__item-right">
-                            <div className="cart__item-title">
-                              <Link
-                                className="cart__item-title"
-                                to={`/card-detail/${cart.cardNameTranslate}`}
-                              >
-                                {cart.cardName}
-                              </Link>
-                            </div>
-                            <div className="cart__item-price">
-                              {cart.count}×{convector(cart.price)}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div
-                          className="cart__item-delete"
-                          onClick={() => deleteItemCart(cart)}
-                        ></div>
-                      </div>
+                          {card.photos &&
+                            card.photos.map((photo, index) => (
+                              <SwiperSlide key={index}>
+                                <img
+                                  src={`http://localhost:8000/${photo}`}
+                                  width={200}
+                                  height={200}
+                                  alt="Photos"
+                                />
+                              </SwiperSlide>
+                            ))}
+                        </Swiper>
+                      </>
                     ) : (
-                      ""
-                    )
-                  )
-                ) : (
-                  <p>В корзине нет товаров.</p>
-                )}
+                      <img
+                        width={200}
+                        height={200}
+                        src={require("../../assets/images/not-photo.jpg")}
+                        alt="Photos"
+                      />
+                    )}
+                  </div>
+                  <div className="card-detail__info-right">
+                    <div className="card-detail__info-right-up">
+                      <div className="card-detail__info-title">
+                        {card.cardName}
+                      </div>
+                      <div className="card-detail__info-prices">
+                        {card.priceSale !== 0 && (
+                          <div className="card-detail__info-price card-detail__info-price--old">
+                            {convector(card.priceSale)}
+                          </div>
+                        )}
+                        <div className="card-detail__info-price">
+                          {convector(card.price)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card-detail__info-right-bottom">
+                      <div className="card-detail__info-counter">
+                        <div className="card-detail__info-btn card-detail__info-btn--cart">
+                          <div className="card__btn card__btn--cart">
+                            <button
+                              onClick={() => onChangeCount("remove", card.id)}
+                            >
+                              {" "}
+                              -
+                            </button>
+                            {counter}
+                            <button
+                              onClick={() => onChangeCount("add", card.id)}
+                            >
+                              {" "}
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <button
+                          className="card-detail__info-btn-add btn btn--brown"
+                          onClick={() => addCart(card)}
+                        >
+                          Добавить в корзину
+                        </button>
+                      </div>
+                      <ul className="card-detail__info-list">
+                        <li className="card-detail__info-item">
+                          <div className="card-detail__info-item-title">
+                            Категория:
+                          </div>
+                          <div className="card-detail__info-item-text">
+                            {card.category}
+                          </div>
+                        </li>
+                        <li className="card-detail__info-item">
+                          <div className="card-detail__info-item-title">
+                            Тег:
+                          </div>
+                          <div className="card-detail__info-item-text">
+                            {tags.map(
+                              (tag) => tag.id === card.tagId && tag.tag
+                            )}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="card-detail__bottom">
+                  <div className="card-detail__bottom-title">
+                    <span>Описание</span>
+                  </div>
+                  <div className="card-detail__bottom-description">
+                    {card.description}
+                  </div>
+                </div>
               </div>
-              {cartResult !== 0 && (
-                <div className="cart__result">
-                  <span>Итого:</span> {convector(cartResult)}
+              <div className="catalog__cart cart border-custom mb-30">
+                <h3 className="cart__title">Корзина</h3>
+                <div className="cart__list">
+                  {cart.length > 0 ? (
+                    cart.map((cart, index) =>
+                      index < 5 ? (
+                        <div className="cart__item" key={cart.id}>
+                          <div className="cart__item-case">
+                            <div className="cart__item-left">
+                              {cart.length > 1 ? (
+                                <img
+                                  width={100}
+                                  height={100}
+                                  src={`http://localhost:8000/${cart.photos[0]}`}
+                                  alt="Photos"
+                                />
+                              ) : (
+                                <img
+                                  width={100}
+                                  height={100}
+                                  src={require("../../assets/images/not-photo.jpg")}
+                                  alt="Photos"
+                                />
+                              )}
+                            </div>
+                            <div className="cart__item-right">
+                              <div className="cart__item-title">
+                                <Link
+                                  className="cart__item-title"
+                                  to={`/card-detail/${cart.cardNameTranslate}`}
+                                >
+                                  {cart.cardName}
+                                </Link>
+                              </div>
+                              <div className="cart__item-price">
+                                {cart.count}×{convector(cart.price)}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            className="cart__item-delete"
+                            onClick={() => deleteItemCart(cart)}
+                          ></div>
+                        </div>
+                      ) : (
+                        ""
+                      )
+                    )
+                  ) : (
+                    <p>В корзине нет товаров.</p>
+                  )}
                 </div>
-              )}
-              {cart.length > 0 && (
-                <div className="cart__btn">
-                  <Link to="/cart" className=" btn btn--brown">
-                    Перейти в корзину
-                  </Link>
-                </div>
-              )}
-              {cart.length > 4 ? <button>Показать все</button> : ""}
+                {cartResult !== 0 && (
+                  <div className="cart__result">
+                    <span>Итого:</span> {convector(cartResult)}
+                  </div>
+                )}
+                {cart.length > 0 && (
+                  <div className="cart__btn">
+                    <Link to="/cart" className=" btn btn--brown">
+                      Перейти в корзину
+                    </Link>
+                  </div>
+                )}
+                {cart.length > 4 ? <button>Показать все</button> : ""}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </>
   );
 };
 

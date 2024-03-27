@@ -6,11 +6,20 @@
 
 //components
 @import "./components/header.scss";
+@import "./components/footer.scss";
+@import "./components/admin.scss";
+@import "./components/adminProduct.scss";
+@import "./components/catalog.scss";
+@import "./components/card-detail.scss";
+@import "./components/header.scss";
 @import "./components/admin.scss";
 @import "./components/adminProduct.scss";
 @import "./components/catalog.scss";
 @import "./components/card-detail.scss";
 @import "./components/about.scss";
+@import "./components/cart-page.scss";
+@import "./components/contact.scss";
+@import "./components/main.scss";
 
 .swiper {
   width: 100%;
@@ -75,4 +84,3 @@
   // object-fit: cover;
   object-fit: contain;
 }
-
