@@ -31,7 +31,7 @@ const Catalog = () => {
   ]);
   const [filterActive, setFilterActive] = useState("По умолчанию");
 
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(12);
   const [page, setPage] = useState(1);
 
   const lastItemsIndex = limit * page;

@@ -2,7 +2,6 @@ body {
   font-family: $fontFamily, $fontDefault !important;
 }
 
-
 .body--active {
   overflow: hidden;
 }
@@ -407,6 +406,7 @@ h3 {
   display: flex;
   flex-direction: column;
   max-width: 270px;
+  height: fit-content;
   &__img {
     position: relative;
     margin-bottom: 20px;
@@ -751,6 +751,28 @@ h3 {
     .btn {
       width: 100%;
       font-size: 18px;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  justify-content: center;
+  gap: 5px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    background-color: #4b4342;
+    border: none;
+
+    &--active {
+      background-color: $aquamarine;
     }
   }
 }

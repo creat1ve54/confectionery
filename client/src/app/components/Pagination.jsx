@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Pagination = ({ page, totalItems, changePage }) => {
   const pageNumbers = [];
+
+  const [active, setActive] = useState(1);
 
   for (let i = 1; i <= Math.ceil(totalItems / page); i++) {
     pageNumbers.push(i);
@@ -15,8 +17,13 @@ const Pagination = ({ page, totalItems, changePage }) => {
               <button
                 onClick={() => {
                   changePage(number);
+                  setActive(number);
                 }}
-                className="pagination__btn"
+                className={
+                  active === number
+                    ? "pagination__btn pagination__btn--active"
+                    : "pagination__btn"
+                }
               >
                 {number}
               </button>

@@ -47,20 +47,21 @@ const Cart = () => {
           result: cartResult,
           phone: phone,
         })
-      );
-      toast.success("Мы вам позвоним для подтверждения заказа!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+      ).then(() => {
+        toast.success("Мы вам позвоним для подтверждения заказа!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        localStorage.setItem("cart", JSON.stringify([]));
+        localStorage.setItem("cartResult", JSON.stringify(0));
+        navigate("/");
       });
-      localStorage.setItem("cart", JSON.stringify([]));
-      localStorage.setItem("cartResult", JSON.stringify(0));
-      navigate("/");
     } catch (error) {
       console.log(error);
     }

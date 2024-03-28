@@ -182,7 +182,7 @@ const Main = () => {
                   />
                 </div>
                 <div className="about__story-item-title h3">Кексы</div>
-                <div className="about__story-item-text h4">Какой-то текст</div>
+                <div className="about__story-item-text h5">Какой-то текст</div>
               </li>
               <li className="about__story-item">
                 <div className="about__story-item-img">
@@ -201,7 +201,7 @@ const Main = () => {
                 <div className="about__story-item-title h3">
                   Маленькие торты
                 </div>
-                <div className="about__story-item-text h4">Какой-то текст</div>
+                <div className="about__story-item-text h5">Какой-то текст</div>
               </li>
               <li className="about__story-item">
                 <div className="about__story-item-img">
@@ -218,7 +218,7 @@ const Main = () => {
                   />
                 </div>
                 <div className="about__story-item-title h3">Кексы</div>
-                <div className="about__story-item-text h4">Какой-то текст</div>
+                <div className="about__story-item-text h5">Какой-то текст</div>
               </li>
             </ul>
           </div>

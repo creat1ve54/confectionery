@@ -1,8 +1,16 @@
 import React from "react";
 
-const Button = ({ text, type, onClick }) => {
+const Button = ({ text, type, onClick, nameClass }) => {
   return (
-    <button type={type} onClick={(e) => onClick(e)} className="btn-custom btn-custom__large">
+    <button
+      type={type}
+      onClick={(e) => onClick(e)}
+      className={
+        nameClass
+          ? "btn-custom btn-custom__large " + nameClass
+          : "btn-custom btn-custom__large"
+      }
+    >
       <span></span>
       {text}
       <span></span>

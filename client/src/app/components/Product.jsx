@@ -177,173 +177,191 @@ const Product = ({ card, tagsArray }) => {
 
   return (
     <>
-      <div className="admin-product__main-add-title">
-        {card && (
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Назад
-          </button>
-        )}
-        {card ? "Изменить или удалить" : "Добваить товар"}
-      </div>
-      <div className="admin-product__main-add-card">
-        {card && (
-          <img src={`http://localhost:8000/${oldPhotos[0]}`} alt="oldPhotos" />
-        )}
-        <div className="admin-product__main-add-card-title">
-          {/* Название товара */}
-          <Input
-            value={cardName}
-            setValue={setCardName}
-            placeholder="Название товара"
-            type="input"
-            valid={{
-              ...register("cardName", {
-                required: true,
-              }),
-            }}
-          />
-          {errors.cardName?.type === "required" && (
-            <div style={{ color: "red", marginTop: "-15px" }}>
-              Поле не должно быть пустое
-            </div>
+      <div className="container">
+        <div className="admin-product__main-add-title">
+          {card && (
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="btn btn--brown"
+            >
+              Назад
+            </button>
+          )}
+          {card ? (
+            <span className="h4">Изменить или удалить</span>
+          ) : (
+            "Добваить товар"
           )}
         </div>
-        <div className="admin-product__main-add-card-title">
-          <Input
-            value={price}
-            type="number"
-            setValue={setPrice}
-            placeholder="Цена товара"
-            valid={{
-              ...register("price", {
-                required: true,
-              }),
-            }}
-          />
-          {errors.price?.type === "required" && (
-            <div style={{ color: "red", marginTop: "-15px" }}>
-              Поле не должно быть пустое
-            </div>
+        <div className="admin-product__main-add-card">
+          {card ? (
+            <img
+              src={`http://localhost:8000/${oldPhotos[0]}`}
+              alt="oldPhotos"
+              className="admin-product__img"
+            />
+          ) : (
+            ""
           )}
-        </div>
-        {/* <div className="admin-product__main-add-card-title">
+          <div className="admin-product__main-add-card-title">
+            {/* Название товара */}
+            <Input
+              value={cardName}
+              setValue={setCardName}
+              placeholder="Название товара"
+              type="input"
+              valid={{
+                ...register("cardName", {
+                  required: true,
+                }),
+              }}
+            />
+            {errors.cardName?.type === "required" && (
+              <div style={{ color: "red", marginTop: "-15px" }}>
+                Поле не должно быть пустое
+              </div>
+            )}
+          </div>
+          <div className="admin-product__main-add-card-title">
+            <Input
+              value={price}
+              type="number"
+              setValue={setPrice}
+              placeholder="Цена товара"
+              valid={{
+                ...register("price", {
+                  required: true,
+                }),
+              }}
+            />
+            {errors.price?.type === "required" && (
+              <div style={{ color: "red", marginTop: "-15px" }}>
+                Поле не должно быть пустое
+              </div>
+            )}
+          </div>
+          {/* <div className="admin-product__main-add-card-title">
                   <Input
                     value={priceSale}
                     setValue={setPriceSale}
                     placeholder="Скидка"
                   />
                 </div> */}
-        <div className="admin-product__main-add-card-title">
-          <label>
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                setSale(e.target.checked);
-              }}
-              value={sale}
-            />
-            <span>Скидка на товар</span>
-          </label>
-          {sale && (
-            <Input
-              value={priceSale}
-              setValue={setPriceSale}
-              placeholder="Цена старая"
-            />
-          )}
-        </div>
-        <div className="admin-product__main-add-card-title">
-          <Input
-            typeInput="textarea"
-            value={description}
-            setValue={setDescription}
-            placeholder="Описание товара"
-          />
-          {/* <textarea /> */}
-        </div>
-        <div className="admin-product__main-add-card-title">
-          Теги
-          <Select
-            active={activeTag}
-            items={tags}
-            itemsKey={"tag"}
-            inputPlaceholder={"Добавить тег"}
-            inputValue={tag}
-            setInputValue={setTag}
-            setActive={setActiveTag}
-            onClick={clickSelect}
-            onKeyDown={onKeySelect}
-            onDelete={onDeleteTag}
-          />
-          {activeTag.id === 0 && isSubmitted ? (
-            <div style={{ color: "red" }}>Выберите тег</div>
-          ) : (
-            ""
-          )}
-          {/* <Input value={tags} setValue={setTags} placeholder="Теги" /> */}
-        </div>
-        <div className="admin-product__main-add-card-title">
-          Категория
-          <Input
-            value={category}
-            setValue={setCategory}
-            placeholder="Категория"
-            valid={{
-              ...register("category", {
-                required: true,
-              }),
-            }}
-          />
-          {errors.category?.type === "required" && (
-            <div style={{ color: "red", marginTop: "-15px" }}>
-              Поле не должно быть пустое
-            </div>
-          )}
-        </div>
-        <div className="admin-product__main-add-card-title">
-          Фото
-          <label>
-            <input
-              // style={{ display: "none" }}
-              type="file"
-              multiple
-              accept="image/*"
-              // value={card}
-              onChange={(e) => {
-                // setPhotos([...e.target.files]);
-                setPhotos(e.target.files);
-              }}
-            />
-            {/* <div>Добавить фото</div> */}
-          </label>
-        </div>
 
-        {card ? (
-          <div>
-            <Button
-              onClick={handleSubmit(updateCard)}
-              type="submit"
-              text="Изменить"
-            />
-            <Button
-              onClick={() => {
-                deleteCard(card.id);
-              }}
-              type="submit"
-              text="Удалить"
-            />
+          <div className="admin-product__main-add-card-title dsadsa">
+            <label>
+              <input
+                type="checkbox"
+                onChange={(e) => {
+                  setSale(e.target.checked);
+                }}
+                checked={sale}
+                value={sale}
+              />
+              <span>Скидка на товар</span>
+            </label>
+            {sale ? (
+              <Input
+                value={priceSale}
+                setValue={setPriceSale}
+                placeholder="Цена старая"
+              />
+            ) : (
+              ""
+            )}
           </div>
-        ) : (
-          <Button
-            onClick={handleSubmit(sendForm)}
-            type="submit"
-            text="Создать"
-          />
-        )}
+          <div className="admin-product__main-add-card-title">
+            <Input
+              typeInput="textarea"
+              value={description}
+              setValue={setDescription}
+              placeholder="Описание товара"
+            />
+            {/* <textarea /> */}
+          </div>
+          <div className="admin-product__main-add-card-title">
+            Теги
+            <Select
+              active={activeTag}
+              items={tags}
+              itemsKey={"tag"}
+              inputPlaceholder={"Добавить тег"}
+              inputValue={tag}
+              setInputValue={setTag}
+              setActive={setActiveTag}
+              onClick={clickSelect}
+              onKeyDown={onKeySelect}
+              onDelete={onDeleteTag}
+            />
+            {activeTag.id === 0 && isSubmitted ? (
+              <div style={{ color: "red" }}>Выберите тег</div>
+            ) : (
+              ""
+            )}
+            {/* <Input value={tags} setValue={setTags} placeholder="Теги" /> */}
+          </div>
+          <div className="admin-product__main-add-card-title">
+            Категория
+            <Input
+              value={category}
+              setValue={setCategory}
+              placeholder="Категория"
+              valid={{
+                ...register("category", {
+                  required: true,
+                }),
+              }}
+            />
+            {errors.category?.type === "required" && (
+              <div style={{ color: "red", marginTop: "-15px" }}>
+                Поле не должно быть пустое
+              </div>
+            )}
+          </div>
+          <div className="admin-product__main-add-card-title">
+            Фото
+            <label>
+              <input
+                // style={{ display: "none" }}
+                type="file"
+                multiple
+                accept="image/*"
+                // value={card}
+                onChange={(e) => {
+                  // setPhotos([...e.target.files]);
+                  setPhotos(e.target.files);
+                }}
+              />
+              {/* <div>Добавить фото</div> */}
+            </label>
+          </div>
+
+          {card ? (
+            <div>
+              <Button
+                onClick={handleSubmit(updateCard)}
+                type="submit"
+                text="Изменить"
+                nameClass="admin-product__main-btn-change"
+              />
+              <Button
+                onClick={() => {
+                  deleteCard(card.id);
+                }}
+                type="submit"
+                text="Удалить"
+              />
+            </div>
+          ) : (
+            <Button
+              onClick={handleSubmit(sendForm)}
+              type="submit"
+              text="Создать"
+            />
+          )}
+        </div>
       </div>
     </>
   );
