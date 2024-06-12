@@ -342,7 +342,7 @@ const Catalog = () => {
                           <div className="cart__item" key={cart.id}>
                             <div className="cart__item-case">
                               <div className="cart__item-left">
-                                {cart.photos > 0 ? (
+                                {cart.photos.length > 0 ? (
                                   <img
                                     width={100}
                                     height={100}

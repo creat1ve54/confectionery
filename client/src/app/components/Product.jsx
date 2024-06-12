@@ -138,6 +138,8 @@ const Product = ({ card, tagsArray }) => {
       data.append("category", category);
       data.append("description", description);
       data.append("count", count);
+
+      console.log(photos);
       if (photos) {
         for (let index = 0; index < photos.length; index++) {
           data.append("photos", photos[index]);
