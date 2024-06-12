@@ -120,7 +120,7 @@ const Header = ({ fake }) => {
                     </Link>
                   </div>
                 )}
-                {cart.length > 4 ? <button>Показать все</button> : ""}
+                {cart.length > 4 ? <Link to="/cart" className="cart__more btn btn--pink">Показать все</Link> : ""}
               </>
             ) : (
               "Корзина пустая!"

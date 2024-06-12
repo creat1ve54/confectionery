@@ -311,14 +311,30 @@ h3 {
     background-color: #4b4342;
     color: #ffffff;
     transition: all 0.3s ease-in-out;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: #4b4342;
+        background-color: #ffffff;
+        color: #4b4342;
+        transition: all 0.3s ease-in-out;
+      }
+    }
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      border-color: #4b4342;
-      background-color: #ffffff;
-      color: #4b4342;
-      transition: all 0.3s ease-in-out;
+  &--pink {
+    background-color: #ff91a4;
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease-in-out;
+
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: #5fcac7;
+        color: #ffffff;
+        transition: all 0.3s ease-in-out;
+      }
     }
   }
 }
@@ -672,6 +688,11 @@ h3 {
     font-size: 28px;
     font-weight: 600;
     color: #4b4342;
+  }
+
+  &__more{
+    margin-top: 12px;
+    width: 100%;
   }
 
   &__item {

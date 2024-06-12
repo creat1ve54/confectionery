@@ -108,6 +108,8 @@ const CardDetail = () => {
     setFake({});
   };
 
+  console.log(card);
+
   useEffect(() => {
     dispatch(getCardThunk(cardNameTranslate));
     dispatch(getAllThunk());
@@ -126,8 +128,11 @@ const CardDetail = () => {
               <div className="card-detail__case">
                 <div className="card-detail__info">
                   <div className="card-detail__info-left">
-                    {card.photos.length > 1 ? (
+                    {card.photos.length > 0 ? (
                       <>
+                        {card.priceSale !== 0 && (
+                          <div className="card-detail__sale">Скидка!</div>
+                        )}
                         <Swiper
                           spaceBetween={10}
                           thumbs={{ swiper: thumbsSwiper }}
@@ -316,7 +321,13 @@ const CardDetail = () => {
                     </Link>
                   </div>
                 )}
-                {cart.length > 4 ? <button>Показать все</button> : ""}
+                {cart.length > 4 ? (
+                  <Link to="/cart" className="cart__more btn btn--pink">
+                    Показать все
+                  </Link>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
