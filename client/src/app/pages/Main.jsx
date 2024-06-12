@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Input from "../UI/Input";
-import Button from "../UI/Button";
-import Svg from "../../assets/svg/Svg";
-import { ToastContainer } from "react-toastify";
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Input from '../UI/Input';
+import Button from '../UI/Button';
+import Svg from '../../assets/svg/Svg';
+import { ToastContainer } from 'react-toastify';
 
 const Main = () => {
   const [show, setShow] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,13 +24,10 @@ const Main = () => {
         <div className="main__banner-container">
           <div className="main__banner-img">
             <div className="main__banner-case">
-              <Svg name={"titleLogo"} width={90} height={43} fill={"#5fcac7"} />
-              <h1 className="main__banner-title">
-                Добро пожаловать в Bellaria
-              </h1>
+              <Svg name={'titleLogo'} width={90} height={43} fill={'#5fcac7'} />
+              <h1 className="main__banner-title">Добро пожаловать в Bellaria</h1>
               <div className="main__banner-text h4">
-                Предлагаем Вам широкий ассортимент различных ароматных выпечек и
-                пироженных
+                Предлагаем Вам широкий ассортимент различных ароматных выпечек и пироженных
               </div>
             </div>
           </div>
@@ -43,89 +40,77 @@ const Main = () => {
             <div className="about__mission-container">
               <h2 className="about__mission-title">Наша миссия</h2>
               <p className="about__mission-text">
-                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                posuere cubilia Curae; Praesent molestie eu turpis nec molestie.
-                Nam auctor magna mauris.
+                Дарить радость и наслаждение вкусом каждому, кто прикоснется к нашим сладостям,
+                создавая неповторимые и изысканные кондитерские шедевры
               </p>
               <ul className="about__mission-list">
                 <li className="about__mission-item">
                   <div className="about__mission-item-img">
                     <Svg
-                      name={"mission-item"}
+                      name={'mission-item'}
                       width={120}
                       height={120}
-                      fill={"none"}
-                      stroke={"#ffffff"}
+                      fill={'none'}
+                      stroke={'#ffffff'}
                     />
                   </div>
-                  <h3 className="about__mission-item-title">
-                    Высокие стандарты
-                  </h3>
+                  <h3 className="about__mission-item-title">Слоган</h3>
                   <div className="about__mission-item-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate eaque nam commodi corrupti facere, dolorum
-                    inventore enim labore harum, rerum debitis nulla, expedita
-                    dolor laboriosam cupiditate hic sunt eum ducimus.
+                    Сладкое счастье в каждом мгновении! Наслаждайтесь вкусом наших десертов.
+                    Покорите новые вкусовые вершины с нами!!
                   </div>
                 </li>
                 <li className="about__mission-item">
                   <div className="about__mission-item-img">
                     <Svg
-                      name={"mission-item"}
+                      name={'mission-item'}
                       width={120}
                       height={120}
-                      fill={"none"}
-                      stroke={"#ffffff"}
+                      fill={'none'}
+                      stroke={'#ffffff'}
                     />
                   </div>
-                  <h3 className="about__mission-item-title">
-                    Высокие стандарты
-                  </h3>
+                  <h3 className="about__mission-item-title">Качество</h3>
                   <div className="about__mission-item-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate eaque nam commodi corrupti facere, dolorum
-                    inventore enim labore harum, rerum debitis nulla, expedita
-                    dolor laboriosam cupiditate hic sunt eum ducimus.
+                    Компания заслуженно пользуется популярностью среди покупателей благодаря
+                    отменному качеству своей продукции. Вкус наших сладостей не оставит равнодушным
+                    даже самого искушенного гурмана. Мы очень ответственно подходим к выбору
+                    ингредиентов и процессу производства, что гарантирует безопасность и
+                    экологичность их товаров.
                   </div>
                 </li>
                 <li className="about__mission-item">
                   <div className="about__mission-item-img">
                     <Svg
-                      name={"mission-item"}
+                      name={'mission-item'}
                       width={120}
                       height={120}
-                      fill={"none"}
-                      stroke={"#ffffff"}
+                      fill={'none'}
+                      stroke={'#ffffff'}
                     />
                   </div>
-                  <h3 className="about__mission-item-title">
-                    Высокие стандарты
-                  </h3>
+                  <h3 className="about__mission-item-title">Созидательность</h3>
                   <div className="about__mission-item-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate eaque nam commodi corrupti facere, dolorum
-                    inventore enim labore harum, rerum debitis nulla, expedita
-                    dolor laboriosam cupiditate hic sunt eum ducimus.
+                    Это место, где каждый день создаются настоящие шедевры из теста, кремов, фруктов
+                    и шоколада. Наши кондитеры обладают высоким профессионализмом и богатой
+                    фантазией, что позволяет им постоянно удивлять и радовать посетителей новыми
+                    вкусами и необычными украшениями.
                   </div>
                 </li>
                 <li className="about__mission-item">
                   <div className="about__mission-item-img">
                     <Svg
-                      name={"mission-item"}
+                      name={'mission-item'}
                       width={120}
                       height={120}
-                      fill={"none"}
-                      stroke={"#ffffff"}
+                      fill={'none'}
+                      stroke={'#ffffff'}
                     />
                   </div>
-                  <h3 className="about__mission-item-title">
-                    Высокие стандарты
-                  </h3>
+                  <h3 className="about__mission-item-title">Энтузиазм</h3>
                   <div className="about__mission-item-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptate eaque nam commodi corrupti facere, dolorum
-                    inventore enim labore harum, rerum debitis nulla, expedita
-                    dolor laboriosam cupiditate hic sunt eum ducimus.
+                    Атмосфера в нашей кондитерской пропитана энтузиазмом и позитивом, ведь мы знаем,
+                    как сделать так, чтобы каждый наш гость ушел довольным и с улыбкой на лице.
                   </div>
                 </li>
               </ul>
@@ -139,86 +124,78 @@ const Main = () => {
           <div className="about__story-container">
             <h2 className="about__story-title">
               Наши фирменные блюда
-              <Svg
-                name={"decor-title"}
-                width={82}
-                height={40}
-                fill={"#4b4342"}
-                stroke={"none"}
-              />
+              <Svg name={'decor-title'} width={82} height={40} fill={'#4b4342'} stroke={'none'} />
             </h2>
             <ul className="about__story-list">
               <li className="about__story-item">
                 <div className="about__story-item-img">
                   <Svg
-                    name={"krug"}
+                    name={'krug'}
                     height={180}
                     width={180}
-                    fill={"transparent"}
-                    stroke={"#5fcac7"}
+                    fill={'transparent'}
+                    stroke={'#5fcac7'}
                   />
-                  <img
-                    src={require("../../assets/images/about/cake_01.png")}
-                    alt="Cake"
-                  />
+                  <img src={require('../../assets/images/about/cake_01.png')} alt="Cake" />
                 </div>
-                <div className="about__story-item-title h3">
-                  Праздничные торты
+                <div className="about__story-item-title h3">Праздничные торты</div>
+                <div className="about__story-item-text h5">
+                  Праздничные торты – это не просто сладкое угощение, а настоящее произведение
+                  искусства, которое становится украшением стола и создает атмосферу торжества.
                 </div>
-                <div className="about__story-item-text h5">Какой-то текст</div>
               </li>
               <li className="about__story-item">
                 <div className="about__story-item-img">
                   <Svg
-                    name={"krug"}
+                    name={'krug'}
                     height={180}
                     width={180}
-                    fill={"transparent"}
-                    stroke={"#5fcac7"}
+                    fill={'transparent'}
+                    stroke={'#5fcac7'}
                   />
-                  <img
-                    src={require("../../assets/images/about/cake_02.png")}
-                    alt="Cake"
-                  />
+                  <img src={require('../../assets/images/about/cake_02.png')} alt="Cake" />
                 </div>
                 <div className="about__story-item-title h3">Кексы</div>
-                <div className="about__story-item-text h5">Какой-то текст</div>
+                <div className="about__story-item-text h5">
+                  {' '}
+                  Здесь вы найдете как классические кексы, так и необычные варианты с добавлением
+                  различных ингредиентов, таких как фрукты, ягоды, орехи и шоколад
+                </div>
               </li>
               <li className="about__story-item">
                 <div className="about__story-item-img">
                   <Svg
-                    name={"krug"}
+                    name={'krug'}
                     height={180}
                     width={180}
-                    fill={"transparent"}
-                    stroke={"#5fcac7"}
+                    fill={'transparent'}
+                    stroke={'#5fcac7'}
                   />
-                  <img
-                    src={require("../../assets/images/about/cake_03.png")}
-                    alt="Cake"
-                  />
+                  <img src={require('../../assets/images/about/cake_03.png')} alt="Cake" />
                 </div>
-                <div className="about__story-item-title h3">
-                  Маленькие торты
+                <div className="about__story-item-title h3">Макарон</div>
+                <div className="about__story-item-text h5">
+                  Французское кондитерское изделие из яичных белков, сахара и молотого миндаля.
+                  Обычно делается в форме печенья; между двумя слоями кладут крем или варенье.
                 </div>
-                <div className="about__story-item-text h5">Какой-то текст</div>
               </li>
               <li className="about__story-item">
                 <div className="about__story-item-img">
                   <Svg
-                    name={"krug"}
+                    name={'krug'}
                     height={180}
                     width={180}
-                    fill={"transparent"}
-                    stroke={"#5fcac7"}
+                    fill={'transparent'}
+                    stroke={'#5fcac7'}
                   />
-                  <img
-                    src={require("../../assets/images/about/cake_04.png")}
-                    alt="Cake"
-                  />
+                  <img src={require('../../assets/images/about/cake_04.png')} alt="Cake" />
                 </div>
-                <div className="about__story-item-title h3">Кексы</div>
-                <div className="about__story-item-text h5">Какой-то текст</div>
+                <div className="about__story-item-title h3">Маленькие пирожные</div>
+                <div className="about__story-item-text h5">
+                  Изысканное и аппетитное лакомство, которое станет прекрасным дополнением к любому
+                  чаепитию или праздничному столу. Эти миниатюрные произведения кондитерского
+                  искусства поражают своим разнообразием и изысканностью вкусов.
+                </div>
               </li>
             </ul>
           </div>
