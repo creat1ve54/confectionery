@@ -28,8 +28,6 @@ const CardDetail = () => {
   let [, setFake] = useState();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  // console.log(card);
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let cartResult = JSON.parse(localStorage.getItem("cartResult")) || 0;
 
@@ -107,8 +105,6 @@ const CardDetail = () => {
 
     setFake({});
   };
-
-  console.log(card);
 
   useEffect(() => {
     dispatch(getCardThunk(cardNameTranslate));

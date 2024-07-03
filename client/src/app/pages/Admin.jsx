@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { checkAdminThunk, loginAdminThunk } from "../../redux/admin/adminSlice";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/Bellaria_logo.png";
 
 const Admin = React.forwardRef((props, ref) => {
   const { isAuth, isLoading, status } = useAppSelector(
@@ -41,6 +42,7 @@ const Admin = React.forwardRef((props, ref) => {
       ) : (
         <div className="admin__login">
           <form className="admin__login-form">
+          <img src={logo} alt="Logo" className="header__logotip" width={150}/>
             <Input
               ref={ref}
               value={userName}
@@ -93,7 +95,7 @@ const Admin = React.forwardRef((props, ref) => {
             <Button
               onClick={handleSubmit(sendForm)}
               type="submit"
-              text="Отправить"
+              text="Войти"
             />
             {status && (
               <div

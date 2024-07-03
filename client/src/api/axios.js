@@ -11,22 +11,7 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-// export const usersAPI = {
-//   register(user) {
-//     return instance.post("/user/registration", { user });
-//   },
-//   login(login, password) {
-//     return instance.post("/user/login", { login, password });
-//   },
-//   getMe() {
-//     return instance.get("/user/me");
-//   },
-// };
-
 export const adminAPI = {
-  // register(user) {
-  //   return instance.post("/user/registration", { user });
-  // },
   login(admin) {
     return instance.post("/admin/login", admin);
   },
@@ -36,9 +21,6 @@ export const adminAPI = {
 };
 
 export const cardAPI = {
-  // register(user) {
-  //   return instance.post("/user/registration", { user });
-  // },
   create(card) {
     return instance.post("/card", card);
   },

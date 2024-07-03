@@ -10,51 +10,55 @@ const Footer = () => {
       <div className="container">
         <div className="footer__wrapper">
           <div className="footer__up">
-            <div className="footer__left ">
-              <div className="footer__left-text">Подпишись на нас</div>
-              <div className="footer__left-line">
-                <Svg
-                  name={"titleLogo"}
-                  width={50}
-                  height={40}
-                  fill={"#ffffff"}
-                />
-              </div>
-              <div className="footer__left-social">
-                <div className="footer__list">
-                  <a href="##" className="footer__item">
+            <div className="footer__left">
+              {false && (
+                <>
+                  <div className="footer__left-text">Подпишись на нас</div>
+                  <div className="footer__left-line">
                     <Svg
-                      className="footer__item-krug"
-                      name={"krug"}
-                      height={60}
-                      width={60}
-                      fill={"white"}
+                      name={"titleLogo"}
+                      width={50}
+                      height={40}
+                      fill={"#ffffff"}
                     />
-                    <Svg
-                      className="footer__item-social"
-                      name={"youtube"}
-                      height={25}
-                      width={25}
-                    />
-                  </a>
+                  </div>
+                  <div className="footer__left-social">
+                    <div className="footer__list">
+                      <a href="##" className="footer__item">
+                        <Svg
+                          className="footer__item-krug"
+                          name={"krug"}
+                          height={60}
+                          width={60}
+                          fill={"white"}
+                        />
+                        <Svg
+                          className="footer__item-social"
+                          name={"youtube"}
+                          height={25}
+                          width={25}
+                        />
+                      </a>
 
-                  <a href="##" className="footer__item">
-                    <Svg
-                      className="footer__item-krug"
-                      name={"krug"}
-                      height={60}
-                      width={60}
-                      fill={"white"}
-                    />
-                    <Svg
-                      className="footer__item-social"
-                      name={"vk"}
-                      height={25}
-                      width={25}
-                    />
-                  </a>
-                </div>
-              </div>
+                      <a href="##" className="footer__item">
+                        <Svg
+                          className="footer__item-krug"
+                          name={"krug"}
+                          height={60}
+                          width={60}
+                          fill={"white"}
+                        />
+                        <Svg
+                          className="footer__item-social"
+                          name={"vk"}
+                          height={25}
+                          width={25}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
             <div className="footer__center">
               <NavLink to={"/"}>

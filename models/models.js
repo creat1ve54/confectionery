@@ -23,11 +23,6 @@ const Card = sequelize.define("card", {
   price: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
   priceSale: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
   rating: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-  // tags: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   defaultValue: "",
-  // },
   category: { type: DataTypes.STRING, allowNull: true, defaultValue: "" },
   description: { type: DataTypes.STRING(2000), allowNull: false, defaultValue: "" },
   count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
@@ -48,8 +43,6 @@ const Tags = sequelize.define("tags", {
   tag: { type: DataTypes.STRING, defaultValue: "" },
 });
 
-// Role.hasOne(User);
-// User.belongsTo(Role);
 
 //Многие ко многим
 Admin.belongsToMany(Card, { through: TypeCard });

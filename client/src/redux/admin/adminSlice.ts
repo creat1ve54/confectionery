@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { adminAPI } from "../../api/axios";
-
-export interface AdminInterface {
-  status: String;
-  isLoading: Boolean;
-  token: String;
-  isAuth: Boolean;
-}
+import { AdminInterface } from "../../interface";
 
 const initialState: AdminInterface = {
   status: "",

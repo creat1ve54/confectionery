@@ -175,9 +175,7 @@ class CardControll {
       }
 
       if (!tags && !text) {
-        cards = await Card.findAll({
-          order: [sortFn(sort)],
-        });
+        cards = await Card.findAll();
       }
       res.json({ cards, message: "Карточка получена" });
     } catch (error) {
@@ -189,7 +187,6 @@ class CardControll {
     try {
       let cards;
       cards = await Card.findAll();
-
       res.json({ cards, message: "Карточки получены" });
     } catch (error) {
       res.json({ message: "Ошибка при получении" });
